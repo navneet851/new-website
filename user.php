@@ -20,7 +20,7 @@ VALUES ('{$name}', '{$username}', '{$email}','{$password}')";
 
 if(mysqli_query($conn,$sql1))
 {
-echo "Username and password has been created";
+echo '<script>alert("Username and password has been created")</script>';
 }
 else{
   echo "Query failed";

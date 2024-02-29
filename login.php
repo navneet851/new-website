@@ -46,6 +46,7 @@
         <input type="password" name="passwd" placeholder="Password"><br>
 
         <button type="submit">Login</button>
+        <a href="main.php">already have account?</a>
     </form>
 </body>
 </html>
