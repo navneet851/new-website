@@ -262,11 +262,20 @@
         </div>
 
         <div class="menu menu2">
+           
+            
+            
+            
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="./images/3~2.jpg" alt="" height="55"></div>
                 <div>
-                    <li style="font-size: 15px;">_navi_0048</li>
-                    <li class="profile-loc">Navneet Yadav</li>
+                <?php
+include "config.php";
+session_start();
+            ?>
+                    <li style="font-size: 15px;"><?php echo $_SESSION["username"]; ?></li>
+                    <li class="profile-loc"><?php echo $_SESSION["Fullname"]; ?></li>
+                    
                 </div>
 
                 <div><a href="#">Switch</a></div>

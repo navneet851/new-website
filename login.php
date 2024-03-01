@@ -38,15 +38,21 @@
     </style>
 </head>
 <body>
-    <form>
+    <form   action="enter-login.php" method="post">
         <p>
             <img src="./logo.jpg" alt="" height="70">
         </p><br><br><br> 
         <input type="text" name="username" placeholder="Username"><br>
         <input type="password" name="passwd" placeholder="Password"><br>
 
-        <button type="submit">Login</button>
+        <button type="submit" value="login">Login</button>
         <a href="main.php">already have account?</a>
     </form>
+
+    
+ 
+    
+
+
 </body>
 </html>
