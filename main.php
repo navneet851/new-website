@@ -271,7 +271,7 @@
                 <div>
                 <?php
 include "config.php";
-session_start();
+// session_start();
             ?>
                     <li style="font-size: 15px;"><?php echo $_SESSION["username"]; ?></li>
                     <li class="profile-loc"><?php echo $_SESSION["Fullname"]; ?></li>
