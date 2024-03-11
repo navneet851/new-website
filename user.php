@@ -14,7 +14,7 @@ if(mysqli_num_rows($result)>0)
 echo "Username and password already exist";
 }
 else{
-$sql1 = "INSERT INTO register (Fullname,username, Email,password1)
+$sql1 = "INSERT INTO register (Fullname,username,Email,password1)
 VALUES ('{$name}', '{$username}', '{$email}','{$password}')";
     // $result1= or die("query failed: insert");
 
@@ -22,7 +22,7 @@ if(mysqli_query($conn,$sql1))
 {
 echo '<script>alert("Username and password has been created")</script>';
 
-header('Location: http://localhost:8080/new-website/login.php');
+header('Location: http://localhost/new-website/login.php');
 }
 else{
   echo "Query failed";
