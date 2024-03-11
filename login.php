@@ -1,3 +1,16 @@
+
+
+<?php
+include "config.php";
+session_start();
+
+if(isset( $_SESSION["username"] ))
+{
+    header('Location: http://localhost:8080/new-website/main.php');
+}
+
+?>
+        
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +59,7 @@
         <input type="password" name="passwd" placeholder="Password"><br>
 
         <button type="submit" value="login">Login</button>
-        <a href="main.php">already have account?</a>
+        <a href="index.php">already have account?</a>
     </form>
 
     

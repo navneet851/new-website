@@ -1,3 +1,17 @@
+<?php
+include "config.php";
+session_start();
+
+if(!isset( $_SESSION["username"] ))
+{
+    header('Location: http://localhost:8080/new-website/login.php');
+}
+
+?>
+           
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -263,22 +277,28 @@
 
         <div class="menu menu2">
            
-            
-            
+ 
             
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="./images/3~2.jpg" alt="" height="55"></div>
                 <div>
-                <?php
-include "config.php";
-session_start();
-            ?>
+                
+
+        
                     <li style="font-size: 15px;"><?php echo $_SESSION["username"]; ?></li>
                     <li class="profile-loc"><?php echo $_SESSION["Fullname"]; ?></li>
                     
                 </div>
+            
 
-                <div><a href="#">Switch</a></div>
+                <div>
+                    
+                <form action="Logout.php" method="post">
+                    
+                <button type="submit" value="Logout" >Logout</button>
+            
+            </form>
+        </div>
             </div>
             <div class="posthead">
                 <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/australian" alt=""

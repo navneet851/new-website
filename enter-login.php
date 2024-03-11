@@ -12,9 +12,9 @@ if(mysqli_num_rows($result)>0)
 while($row = mysqli_fetch_assoc($result))
 {
 session_start();
-echo $_SESSION["username"] = "{$row['username']}";
-$_SESSION["user_id"] = "{$row['user_id']}";
-$_SESSION["Fullname"] = "{$row['Fullname']}";
+ $_SESSION["username"] ="{$row['username']}";
+$_SESSION["user_id"] ="{$row['user_id']}";
+$_SESSION["Fullname"] ="{$row['Fullname']}";
 
 }
 
