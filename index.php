@@ -78,7 +78,6 @@ if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
         <input type="text" name="lastname" placeholder="Last Name"><br>
         <input type="text" name="username" placeholder="Username"><br>
         <input type="password" name="passwd" placeholder="Password"><br>
-        <!-- <input type="hidden" name="id" value="1" placeholder="Pass"><br> -->
 
         <button type="submit" value="Submit">sign in</button>
         <a href="login.php">already have account?</a>
