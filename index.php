@@ -10,7 +10,15 @@ if(isset( $_SESSION["username"] ))
     header('Location: http://localhost:8080/new-website/main.php');
 }
 
+if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
+{
+
+    echo '<script>alert("Username already existed")</script>';
+
+}
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -49,6 +57,7 @@ if(isset( $_SESSION["username"] ))
             color: white;
             font-weight: bold;
             margin-top : 60px;
+            margin: 10px;
         }
         form a{
             color: #5097e7;
@@ -65,13 +74,16 @@ if(isset( $_SESSION["username"] ))
             <img src="./logo.jpg" alt="" height="70">
         </p><br><br><br> 
         <input type="email" name="email" placeholder="E mail"><br>
-        <input type="text" name="name" placeholder="Full Name"><br>
+        <input type="text" name="firstname" placeholder="First Name"><br>
+        <input type="text" name="lastname" placeholder="Last Name"><br>
         <input type="text" name="username" placeholder="Username"><br>
         <input type="password" name="passwd" placeholder="Password"><br>
+        <!-- <input type="hidden" name="id" value="1" placeholder="Pass"><br> -->
 
-        <button type="submit">sign in</button>
+        <button type="submit" value="Submit">sign in</button>
         <a href="login.php">already have account?</a>
     </form>
+   
     
 </body>
 </html>

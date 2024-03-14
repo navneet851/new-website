@@ -8,6 +8,12 @@ if(isset( $_SESSION["username"] ))
 {
     header('Location: http://localhost:8080/new-website/main.php');
 }
+if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
+{
+
+    echo '<script>alert("Successfully Registered")</script>';
+
+}
 
 ?>
         
@@ -46,7 +52,13 @@ if(isset( $_SESSION["username"] ))
             background-color: #5097e7;
             color: white;
             font-weight: bold;
-            margin: 60px;
+            margin-top: 60px;
+            margin: 10px;
+        }
+        form a{
+            color: #5097e7;
+            text-decoration : none;
+            font-size : 13px;
         }
     </style>
 </head>
@@ -59,7 +71,7 @@ if(isset( $_SESSION["username"] ))
         <input type="password" name="passwd" placeholder="Password"><br>
 
         <button type="submit" value="login">Login</button>
-        <a href="index.php">already have account?</a>
+        <a href="index.php">Sign up</a>
     </form>
 
     

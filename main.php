@@ -281,21 +281,15 @@ if(!isset( $_SESSION["username"] ))
             
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="./images/3~2.jpg" alt="" height="55"></div>
- 
-                    <li style="font-size: 15px;"><?php echo $_SESSION["username"]; ?></li>
-                    <li class="profile-loc"><?php echo $_SESSION["Fullname"]; ?></li>
-                    
-                </div>
-            
-
                 <div>
-                    
-                <form action="Logout.php" method="post">
-                    
-                <button type="submit" value="Logout" >Logout</button>
-            
-            </form>
-        </div>
+                    <li style="font-size: 15px;"><?php echo $_SESSION["username"]; ?></li>
+                    <li class="profile-loc"><?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"]; ?></li>
+                    </div>
+                <div>
+                    <form action="Logout.php" method="post">  
+                        <button type="submit" value="Logout" >Logout</button>
+                    </form>
+                </div>
             </div>
             <div class="posthead">
                 <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/australian" alt=""
