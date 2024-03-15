@@ -17,9 +17,8 @@
 
         .frame {
             display: grid;
-            grid-template-columns: 1fr 3fr;
+            grid-template-columns: 1fr 5fr;
             height: 100vh;
-            gap: 150px;
         }
 
         .menu-bar {
@@ -75,23 +74,31 @@
             position: relative;
             flex-direction: column;
             height: 100vh;
-            width: 300px;
 
         }
 
-        .menu1, .profile, .profile-details{
+        .menu1,
+        .profile,
+        .profile-details {
             display: flex;
             align-items: center;
         }
-        .menu1{
+
+        .menu1 {
+            justify-content: center;
             flex-direction: column;
             max-width: 60%;
-            
+            height: 100vh;
+            margin-top: 30px;
         }
-        .menu1{
-            border: 1px solid;
+
+        #profile {
+            height: 20px;
+            border-radius: 50%;
         }
-        .profile{
+
+
+        .profile {
             width: 100%;
             height: 300px;
             flex-direction: row;
@@ -99,23 +106,152 @@
             background-color: rgb(247, 244, 247);
             border-radius: 15px;
         }
-        .profile img{
+
+        .profile img {
             max-height: 150px;
             border-radius: 50%;
         }
-        .profile-details{
+
+        .profile-details {
             height: 150px;
             justify-content: space-evenly;
             align-items: start;
             flex-direction: column;
         }
-        #profile-credits{
+
+        #profile-credits {
             width: 350px;
-           display: flex;
-           justify-content: space-between;
+            display: flex;
+            justify-content: space-between;
         }
-        ul li{
+
+        ul li {
             list-style: none;
+        }
+
+        .profile-posts {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            overflow-y: scroll;
+            border-radius: 15px;
+        }
+
+        .profile-posts::-webkit-scrollbar {
+            display: none;
+        }
+
+        .profile-posts img {
+            max-height: 266px;
+        }
+
+        .menu-top,
+        .menu-bottom {
+            display: none;
+        }
+
+        @media screen and (max-width:650px) and (min-width:501px) {
+            .frame {
+                grid-template-columns: auto auto;
+            }
+
+            .text {
+                display: none;
+            }
+
+            #logo {
+                content: url("./images/instagram-short.png");
+                height: 32px;
+            }
+
+            #svg7 {
+                display: none;
+            }
+
+            .id {
+                width: 70px;
+            }
+
+            .profile img {
+                height: 100px;
+            }
+
+        }
+
+        @media screen and (max-width:499px) {
+
+            #hover1:hover,
+            #hover2:hover,
+            #hover3:hover,
+            #hover4:hover,
+            #hover5:hover,
+            #hover6:hover,
+            #hover7:hover {
+                background-color: white;
+                font-weight: normal;
+                border-radius: 20px;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .frame {
+                grid-template-columns: auto;
+            }
+
+            .menu1 {
+                width: 100%;
+                height: 100vh;
+            }
+
+            #logo {
+                margin: 0px 10px;
+            }
+
+            .profile img {
+                height: 80px;
+            }
+
+            .profile-posts {
+                height: 100vh;
+            }
+
+            .profile-posts img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .menu-top {
+                position: fixed;
+                top: 0;
+                background: white;
+                display: grid;
+                align-items: center;
+                text-align: left;
+                grid-template-columns: 2fr 0.3fr 0.3fr;
+                width: 100%;
+                z-index: 100;
+            }
+
+            .menu-top img {
+                height: 23px;
+                margin: 10px 0px;
+            }
+
+            .menu-bottom {
+                position: fixed;
+                bottom: 0;
+                background: white;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 100%;
+            }
+
+
         }
     </style>
 </head>
@@ -123,50 +259,48 @@
 <body>
     <div class="frame">
         <div class="menu">
-            <div class="menu menu0">
-                <div id="logo-div"><img id="logo" src="./images/Instagram.png" alt="logo"></div>
+            <div id="logo-div"><img id="logo" src="./images/Instagram.png" alt="logo"></div>
 
 
-                <div id="hover1" class="menu-bar home">
-                    <div><img src="./images/home.jpg" alt="home"></div>
-                    <div class="text">Home</div>
+            <div id="hover1" class="menu-bar home">
+                <div><img src="./images/home.jpg" alt="home"></div>
+                <div class="text">Home</div>
+            </div>
+            <a class="postman" href="search.html">
+                <div id="hover2" class="menu-bar find">
+                    <div><img src="./images/search.png" alt="search"></div>
+                    <div class="text">Search</div>
                 </div>
-                <a class="postman" href="search.html">
-                    <div id="hover2" class="menu-bar find">
-                        <div><img src="./images/search.png" alt="search"></div>
-                        <div class="text">Search</div>
-                    </div>
-                </a>
-                <div id="hover3" class="menu-bar">
-                    <div><img src="./images/heart.png" alt="notification"></div>
-                    <div class="text">Notifications</div>
-                </div>
-                <div id="hover4" class="menu-bar">
-                    <div><img src="./images/messenger.png" alt="chat"></div>
-                    <div class="text">Messages</div>
-                </div>
-                <div id="hover5" class="menu-bar">
-                    <div><img src="./images/instagram-reels.png" alt="reels"></div>
-                    <div class="text">Reels</div>
-                </div>
-                <div id="hover6" class="menu-bar">
-                    <div><img src="./images/story.png" alt="add"></div>
-                    <div class="text">Create</div>
-                </div>
-                <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
-                    <div class="text">Profile</div>
-                </div>
-                <div class="menu-bar bottom">
-                    <div><img src="./images/menu.png" alt="menu"></div>
-                    <div class="text">More</div>
-                </div>
+            </a>
+            <div id="hover3" class="menu-bar">
+                <div><img src="./images/heart.png" alt="notification"></div>
+                <div class="text">Notifications</div>
+            </div>
+            <div id="hover4" class="menu-bar">
+                <div><img src="./images/messenger.png" alt="chat"></div>
+                <div class="text">Messages</div>
+            </div>
+            <div id="hover5" class="menu-bar">
+                <div><img src="./images/instagram-reels.png" alt="reels"></div>
+                <div class="text">Reels</div>
+            </div>
+            <div id="hover6" class="menu-bar">
+                <div><img src="./images/story.png" alt="add"></div>
+                <div class="text">Create</div>
+            </div>
+            <div id="hover7" class="menu-bar">
+                <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                <div class="text">Profile</div>
+            </div>
+            <div class="menu-bar bottom">
+                <div><img src="./images/menu.png" alt="menu"></div>
+                <div class="text">More</div>
             </div>
         </div>
         <div class="menu1">
             <div class="profile">
                 <div><img src="images/3~2.jpg" alt=""></div>
-                <div class="profile-details">       
+                <div class="profile-details">
                     <div style="font-size: 20px;">_navi_0048</div>
                     <div>
                         <ul id="profile-credits">
@@ -184,8 +318,53 @@
                 </div>
             </div>
             <div class="profile-posts">
-                
-                <img src="images/3~2.jpg" alt="" height="100">
+
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+                <img src="images/3~2.jpg" alt="">
+            </div>
+        </div>
+
+
+
+        <!-- mediaquery -->
+
+        <div class="menu-top">
+            <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
+            <div><img src="./images/heart.png" alt="notification"></div>
+            <div><img src="./images/messenger.png" alt="chat"></div>
+        </div>
+
+
+        <div class="menu-bottom">
+            <div id="hover1" class="menu-bar home">
+                <div><img src="./images/home.jpg" alt="home"></div>
+            </div>
+            <a class="postman" href="search.html">
+                <div id="hover2" class="menu-bar find">
+                    <div><img src="./images/search.png" alt="search"></div>
+                </div>
+            </a>
+            <div id="hover4" class="menu-bar">
+                <div><img src="./images/story.png" alt="add"></div>
+            </div>
+            <div id="hover6" class="menu-bar">
+                <div><img src="./images/instagram-reels.png" alt="reels"></div>
+            </div>
+            <div id="hover7" class="menu-bar">
+                <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
             </div>
         </div>
     </div>
