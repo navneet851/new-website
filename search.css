@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* background-color: black;
+    color: white; */
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; */
+    font-family: Nunito;
+}
+
+.frame {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1.6fr;
+    height: 100vh;
+}
+
+.menu {
+    border-right: 1px solid rgb(255, 239, 228);
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.postman {
+    text-decoration: none;
+    color: black;
+}
+
+#logo {
+    margin: 20px;
+    height: 45px;
+}
+
+#profile {
+    height: 20px;
+    border-radius: 50%;
+}
+
+#hover2 {
+    background-color: rgb(247, 244, 247);
+    font-weight: 700;
+    border-radius: 0px 12px 12px 0px;
+}
+
+#hover1:hover,
+#hover2:hover,
+#hover3:hover,
+#hover4:hover,
+#hover5:hover,
+#hover6:hover,
+#hover7:hover {
+    background-color: rgb(247, 244, 247);
+    font-weight: 700;
+    border-radius: 0px 12px 12px 0px;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.text {
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.menu-bar img {
+    height: 23px;
+    margin: 15px;
+}
+
+.profile-icon img {
+    border-radius: 50%;
+}
+
+.profile-loc {
+    font-size: 12px;
+    /* color: #bbbbbb; */
+    opacity: 0.7;
+
+}
+
+.posthead {
+    display: grid;
+    grid-template-columns: 0.4fr 3fr 0.2fr;
+    align-items: center;
+    text-align: left;
+    padding-left: 6px;
+}
+
+.posthead div li {
+    list-style-type: none;
+    text-align: left;
+}
+
+.menu2 div {
+    margin: 3px;
+}
+
+.menu2 {
+    align-items: center;
+    border: none;
+}
+
+.menu2 .posthead {
+    width: 350px;
+}
+
+.profile-main {
+    padding-top: 35px;
+    margin: 2px;
+    display: grid;
+    grid-template-columns: 0.6fr 2.8fr 0.1fr;
+    border-bottom: 1px solid rgb(255, 239, 228);
+}
+
+.menu2 .posthead a {
+    font-size: 13px;
+    text-decoration: none;
+    padding: 2px 15px;
+    border-radius: 4px;
+    color: white;
+    background-color: #1877F2;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.posts::-webkit-scrollbar {
+    display: none;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 420px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 8px;
+}
+
+.posts img {
+    height: 140px;
+}
+
+.posts img:hover {
+    filter: blur(3px);
+}
+
+input {
+    height: 60px;
+    width: 340px;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    background-color: rgb(229, 229, 230);
+    padding-left: 20px;
+    font-size: 14px;
+    margin: 50px;
+}
+
+#input-search {
+    display: none;
+}
+
+.menu-bottom {
+    display: none;
+}
+
+@media only screen and (max-width:950px) and (min-width:750px) {
+    .menu2 {
+        display: none;
+    }
+
+    .frame {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width:750px) and (min-width:500px) {
+
+    .menu2,
+    .text {
+        display: none;
+    }
+
+    .menu0 {
+        align-items: center;
+    }
+
+    #logo {
+        content: url("./images/instagram-short.png");
+        height: 32px;
+    }
+
+    .frame {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media screen and (max-width:500px) {
+
+    #hover1:hover,
+    #hover2:hover,
+    #hover3:hover,
+    #hover4:hover,
+    #hover5:hover,
+    #hover6:hover,
+    #hover7:hover {
+        background-color: white;
+        font-weight: normal;
+        border-radius: 20px;
+    }
+
+    .menu0,
+    .menu2 {
+        display: none;
+    }
+
+
+    .frame {
+        grid-template-columns: auto;
+    }
+
+    .menu-bottom {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        background: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100vw;
+    }
+
+    #hover2 {
+        border-radius: 20px;
+    }
+
+    input {
+        position: fixed;
+        top: 0;
+        width: 80%;
+        height: 35px;
+        margin: 10px;
+        border-radius: 12px;
+    }
+
+    .posts {
+        width: 100%;
+        height: 100vh;
+        margin-top: 60px;
+        padding-bottom: 70px;
+        border-radius: 0;
+    }
+
+    .posts img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+}

@@ -232,7 +232,9 @@ svg {
     align-items: center;
     border: none;
 }
-
+.menu2 .posthead {
+    width: 350px;
+}
 .menu2 div {
     margin: 3px;
 }
