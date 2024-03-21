@@ -19,7 +19,7 @@
             <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
 
 
-            <a class="postman" href="index.html">
+            <a class="postman" href="index.php">
                 <div id="hover1" class="menu-bar home">
                     <div><img src="./images/home.jpg" alt="home"></div>
                     <div class="text">Home</div>
@@ -41,14 +41,18 @@
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
                 <div class="text">Reels</div>
             </div>
-            <div id="hover6" class="menu-bar">
-                <div><img src="./images/story.png" alt="add"></div>
-                <div class="text">Create</div>
-            </div>
-            <div id="hover7" class="menu-bar">
-                <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
-                <div class="text">Profile</div>
-            </div>
+            <a class="postman" href="create.php">
+                <div id="hover6" class="menu-bar">
+                    <div><img src="./images/story.png" alt="add"></div>
+                    <div class="text">Create</div>
+                </div>
+            </a>
+            <a class="postman" href="profile.php">
+                <div id="hover7" class="menu-bar">
+                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                    <div class="text">Profile</div>
+                </div>
+            </a>
             <div class="menu-bar bottom">
                 <div><img src="./images/menu.png" alt="menu"></div>
                 <div class="text">More</div>
