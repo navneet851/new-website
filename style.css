@@ -247,7 +247,15 @@ svg {
     border-bottom: 1px solid rgb(255, 239, 228);
 }
 
-.menu2 .posthead a {
+.menu2 .posthead a{
+    font-size: 13px;
+    text-decoration: none;
+    padding: 2px 15px;
+    border-radius: 4px;
+    color: white;
+    background-color: #1877F2;
+}
+#logout{
     font-size: 13px;
     text-decoration: none;
     padding: 2px 15px;

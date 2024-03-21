@@ -291,7 +291,7 @@ if(!isset( $_SESSION["username"] ))
                     </div>
                 <div>
                     <form action="Logout.php" method="post">  
-                        <button type="submit" value="Logout" >Logout</button>
+                        <button id="logout" type="submit" value="Logout" >Logout</button>
                     </form>
                 </div>
             </div>

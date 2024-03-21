@@ -262,18 +262,18 @@
 
         <div class="search">
             <div class="profile">
-                <form action="" method="post">
+                <form action="save-post.php" method="post"  enctype="multipart/form-data">
                     <div class="profile-container">
                         <div id="image-preview">
                             <img id="preview" alt="">
                         </div>
 
-                        <input id="choose-file" type="file" accept="image/*" onchange="previewImage(event)" hidden />
+                        <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)" hidden />
                         <label for="choose-file">add image</label>
                         <div class="profile-credits">
                             <h4>_navi_0048</h4>
-                            <input type="text" placeholder="add caption">
-                            <input type="text" placeholder="Location">
+                            <input type="text"  name="caption"  placeholder="add caption">
+                            <input type="text" name="loc"  placeholder="Location">
                             <button type="submit">Post</button>
                         </div>
                     </div>
