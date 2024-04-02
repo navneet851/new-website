@@ -1,3 +1,15 @@
+<?php
+include "config.php";
+session_start();
+
+if(!isset( $_SESSION["username"] ))
+{
+    header('Location: http://localhost:8080/new-website/login.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -245,11 +257,28 @@
                     </div>
                 </div>
             </div>
+            <?php
+include "config.php";
+//session_start();
+$user_id= $_SESSION["user_id"];
+$sql="select * from posts where user_id='{$user_id}' ORDER BY post_id DESC";
 
+$result=mysqli_query($conn,$sql) or die("Query failed");
+if(mysqli_num_rows($result) > 0) {
+
+
+
+
+            ?>
             <div class="posts">
                 <div class="tag">POSTS</div>
-                <img src="https://source.unsplash.com/random/1080x1080/?cars" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?animals" alt="">
+                <?php
+                while($row=mysqli_fetch_assoc($result))
+
+{
+    ?>
+                <img src="post-images/<?php echo $row["post_img"]; ?>" alt="">
+                <!-- <img src="https://source.unsplash.com/random/1080x1080/?animals" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?quotes" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?sky" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?space" alt="">
@@ -268,10 +297,19 @@
                 <img src="https://source.unsplash.com/random/1080x1080/?women" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?girl" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?college" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?books" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?books" alt=""> -->
+                <?php
+                }
+                ?>
             </div>
         </div>
+        <?php
 
+}
+else{
+    echo "<h1>No post<?h1>";
+}
+            ?>
         <div class="menu-top">
             <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
             <div><img src="./images/heart.png" alt="notification"></div>

@@ -125,23 +125,37 @@ if(!isset( $_SESSION["username"] ))
                 </div>
             </div>
             </div>
+            <?php
+include "config.php";
+
+$sql="select * from posts ORDER BY post_id DESC";
+
+$result=mysqli_query($conn,$sql) or die("Query failed");
+if(mysqli_num_rows($result) > 0) {
+
+
+
+while($row=mysqli_fetch_assoc($result))
+
+{
+            ?>
             <div class="post">
                 <div class="posthead">
                     <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
                             height="40"></div>
                     <div>
                         <li style="font-size: 15px; display: flex; align-items: center">
-                            <pr style="margin-right: 3px; font-weight: 600;">Gtr</pr><img
+                            <pr style="margin-right: 3px; font-weight: 600;"><?php echo $row["uid1"]; ?></pr><img
                                 src="./images/pinpng.com-instagram-symbol-png-102490.png" height="14" alt="">
                         </li>
-                        <li class="profile-loc">california,USA</li>
+                        <li class="profile-loc"><?php echo $row["location1"]; ?></li>
                     </div>
 
                     <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
                 </div>
                 <div id="dbl-ani1" class="post-anim">
                     <img id="ani1" src="./images/whiteh.png" alt="">
-                    <img class="pic" src="https://source.unsplash.com/random/1280x1440/?racingcars/gtr" alt="">
+                    <img class="pic" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
                 </div>
                 <div class="postbottom">
                     <div class="bottom_menu">
@@ -152,14 +166,17 @@ if(!isset( $_SESSION["username"] ))
                     </div>
                     <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">2,99,792 likes</div>
                     <div class="bottom-menu-margin" style="font-size: 15px;">
-                        <pr style="margin-right: 5px; font-weight: 700;">Gtr</pr>(K/PGC10) - 1969-1972. • Hakosuka: the
-                        box Skyline.
+                        <pr style="margin-right: 5px; font-weight: 700;"><?php echo $_SESSION["username"]; ?></pr><?php echo $row["caption"]; ?>
                     </div>
                     <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all 1.1M comments</div>
                     <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a comment</div>
                 </div>
-            </div>
-            <div class="post">
+</div>
+            <?php
+}
+}
+            ?>
+            <!-- <div class="post">
                 <div class="posthead">
                     <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?coding" height="40">
                     </div>
@@ -257,7 +274,7 @@ if(!isset( $_SESSION["username"] ))
                     <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all 3k comments</div>
                     <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a comment</div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="menu-bottom">
             <div id="hover1" class="menu-bar home">

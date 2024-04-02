@@ -27,14 +27,15 @@ if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target)) {
 
 
 session_start();
+$Uid=$_SESSION["username"];
 $user_id=   $_SESSION["user_id"];
 $location1=mysqli_real_escape_string($conn,$_POST['loc']);
 $cap=mysqli_real_escape_string($conn,$_POST['caption']);
 
 
 
-$sql="INSERT INTO posts(caption,location1,post_img,user_id)
-VALUES ('{$cap}','{$location1}','{$newname}',{$user_id})";
+$sql="INSERT INTO posts(caption,location1,post_img,uid1,user_id)
+VALUES ('{$cap}','{$location1}','{$newname}','{$Uid}',{$user_id})";
 
 if(mysqli_multi_query($conn,$sql)){
 
