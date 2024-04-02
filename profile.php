@@ -236,9 +236,9 @@
                     <div class="profile-credits">
                         <h2>_navi_0048</h2>
                             <ul>
-                                <li>0 Posts</li>
-                                <li>500 followers</li>
-                                <li>100 following</li>
+                                <li><span style="font-weight: bold">0</span> Posts</li>
+                                <li><span style="font-weight: bold">500</span> followers</li>
+                                <li><span style="font-weight: bold">100</span> following</li>
                             </ul>
                             <h4>Navneet Yadav</h4>
                             <p>#spacious</p>
