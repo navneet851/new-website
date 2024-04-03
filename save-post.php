@@ -27,8 +27,9 @@ if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target)) {
 
 
 session_start();
-$Uid=$_SESSION["username"];
-$user_id=   $_SESSION["user_id"];
+ $Uid=$_SESSION["username"];
+$user_id=$_SESSION["user_id"];
+
 $location1=mysqli_real_escape_string($conn,$_POST['loc']);
 $cap=mysqli_real_escape_string($conn,$_POST['caption']);
 

@@ -131,6 +131,9 @@ include "config.php";
 $sql="select * from posts ORDER BY post_id DESC";
 
 $result=mysqli_query($conn,$sql) or die("Query failed");
+
+
+
 if(mysqli_num_rows($result) > 0) {
 
 
