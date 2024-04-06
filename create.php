@@ -232,7 +232,7 @@
                     <div class="text">Search</div>
                 </div>
             </a>
-            <div id="hover3" class="menu-bar">
+            <!-- <div id="hover3" class="menu-bar">
                 <div><img src="./images/heart.png" alt="notification"></div>
                 <div class="text">Notifications</div>
             </div>
@@ -243,7 +243,7 @@
             <div id="hover5" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
                 <div class="text">Reels</div>
-            </div>
+            </div> -->
             <div id="hover6" class="menu-bar">
                 <div><img src="./images/story.png" alt="add"></div>
                 <div class="text">Create</div>
@@ -254,7 +254,7 @@
                     <div class="text">Profile</div>
                 </div>
             </a>
-            <div class="menu-bar bottom">
+            <div id="hover4" class="menu-bar">
                 <div><img src="./images/menu.png" alt="menu"></div>
                 <div class="text">More</div>
             </div>
@@ -287,24 +287,27 @@
             <div><img src="./images/messenger.png" alt="chat"></div>
         </div>
         <div class="menu-bottom">
-            <a class="postman" href="index.html">
+            <a class="postman" href="main.php">
                 <div id="hover1" class="menu-bar home">
                     <div><img src="./images/home.jpg" alt="home"></div>
                 </div>
             </a>
+            <a class="postman" href="search.php">
             <div id="hover2" class="menu-bar find">
                 <div><img src="./images/search.png" alt="search"></div>
             </div>
-
+            </a>
             <div id="hover4" class="menu-bar">
                 <div><img src="./images/story.png" alt="add"></div>
             </div>
-            <div id="hover6" class="menu-bar">
+            <!-- <div id="hover6" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
-            </div>
+            </div> -->
+            <a class="postman" href="profile.php">
             <div id="hover7" class="menu-bar">
                 <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
             </div>
+            </a>
         </div>
     </div>
     <script>

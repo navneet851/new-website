@@ -29,7 +29,7 @@
                 <div><img src="./images/search.png" alt="search"></div>
                 <div class="text">Search</div>
             </div>
-            <div id="hover3" class="menu-bar">
+            <!-- <div id="hover3" class="menu-bar">
                 <div><img src="./images/heart.png" alt="notification"></div>
                 <div class="text">Notifications</div>
             </div>
@@ -40,7 +40,7 @@
             <div id="hover5" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
                 <div class="text">Reels</div>
-            </div>
+            </div> -->
             <a class="postman" href="create.php">
                 <div id="hover6" class="menu-bar">
                     <div><img src="./images/story.png" alt="add"></div>
@@ -53,7 +53,7 @@
                     <div class="text">Profile</div>
                 </div>
             </a>
-            <div class="menu-bar bottom">
+            <div id="hover4" class="menu-bar">
                 <div><img src="./images/menu.png" alt="menu"></div>
                 <div class="text">More</div>
             </div>
@@ -63,48 +63,52 @@
             <input type="text" placeholder="Search" autocomplete="on" autofocus>
 
             <div class="posts">
-                <img src="https://source.unsplash.com/random/1080x1080/?cars"    alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?cars" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?animals" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?quotes"  alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?sky"     alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?space"   alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?quotes" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?sky" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?space" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?planets" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?nature"  alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?mountains"   alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?citys"       alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?nature" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?mountains" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?citys" alt="">
                 <img src="https://source.unsplash.com/random/1080x1080/?skyscrapers" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?coding"      alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?robot"      alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?spacex"      alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?internet"    alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?men"         alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?boy"         alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?puppies"     alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?women"       alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?girl"        alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?college"     alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?books"       alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?coding" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?robot" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?spacex" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?internet" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?men" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?boy" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?puppies" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?women" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?girl" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?college" alt="">
+                <img src="https://source.unsplash.com/random/1080x1080/?books" alt="">
             </div>
         </div>
         <div class="menu-bottom">
-            <a class="postman" href="index.html">
-            <div id="hover1" class="menu-bar home">
-                <div><img src="./images/home.jpg" alt="home"></div>
-            </div>
-            </a>
-                <div id="hover2" class="menu-bar find">
-                    <div><img src="./images/search.png" alt="search"></div>
+            <a class="postman" href="main.php">
+                <div id="hover1" class="menu-bar home">
+                    <div><img src="./images/home.jpg" alt="home"></div>
                 </div>
-            
-            <div id="hover4" class="menu-bar">
-                <div><img src="./images/story.png" alt="add"></div>
+            </a>
+            <div id="hover2" class="menu-bar find">
+                <div><img src="./images/search.png" alt="search"></div>
             </div>
-            <div id="hover6" class="menu-bar">
+
+            <a class="postman" href="create.php">
+                <div id="hover4" class="menu-bar">
+                    <div><img src="./images/story.png" alt="add"></div>
+                </div>
+            </a>
+            <!-- <div id="hover6" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
-            </div>
-            <div id="hover7" class="menu-bar">
-                <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
-            </div>
+            </div> -->
+            <a class="postman" href="profile.php">
+                <div id="hover7" class="menu-bar">
+                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                </div>
+            </a>
         </div>
         <div class="menu menu2">
             <div class="posthead profile-main">

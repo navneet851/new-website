@@ -2,13 +2,12 @@
 include "config.php";
 session_start();
 
-if(!isset( $_SESSION["username"] ))
-{
+if (!isset($_SESSION["username"])) {
     header('Location: http://localhost:8080/new-website/login.php');
 }
 
 ?>
-           
+
 
 
 
@@ -44,7 +43,7 @@ if(!isset( $_SESSION["username"] ))
                     <div class="text">Search</div>
                 </div>
             </a>
-            <div id="hover3" class="menu-bar">
+            <!-- <div id="hover3" class="menu-bar">
                 <div><img src="./images/heart.png" alt="notification"></div>
                 <div class="text">Notifications</div>
             </div>
@@ -55,7 +54,7 @@ if(!isset( $_SESSION["username"] ))
             <div id="hover5" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
                 <div class="text">Reels</div>
-            </div>
+            </div> -->
             <a class="postman" href="create.php">
                 <div id="hover6" class="menu-bar">
                     <div><img src="./images/story.png" alt="add"></div>
@@ -68,250 +67,168 @@ if(!isset( $_SESSION["username"] ))
                     <div class="text">Profile</div>
                 </div>
             </a>
-            <div class="menu-bar bottom">
-                <div><img src="./images/menu.png" alt="menu"></div>
+            <div id="hover4" class="menu-bar">
+                <div><img src="./images/menu.png" alt="chat"></div>
                 <div class="text">More</div>
             </div>
         </div>
         <div class="menu-top">
             <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
-            <div><img src="./images/heart.png" alt="notification"></div>
-            <div><img src="./images/messenger.png" alt="chat"></div>
+            <!-- <div><img src="./images/menu.png" alt="menu"></div> -->
+            <div><img src="./images/menu.png" alt="menu"></div>
+
         </div>
         <div class="main menu menu1">
             <div class="story-outer">
-            <div class="story">
-                <div class="id" id="svg"><img src="./images/3~2.jpg" alt="">
-                    <svg id="sv" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>your story</p>
+                <div class="story">
+                    <div class="id" id="svg"><img src="./images/3~2.jpg" alt="">
+                        <svg id="sv" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>your story</p>
+                    </div>
+                    <div class="id" id="svg2"><img src="https://source.unsplash.com/random/360x360/?coding" alt="">
+                        <svg id="sv2" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>code_hub</p>
+                    </div>
+                    <div class="id" id="svg3"><img src="https://source.unsplash.com/random/360x360/?women" alt="">
+                        <svg id="sv3" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>stacy grand</p>
+                    </div>
+                    <div class="id" id="svg4"><img src="https://source.unsplash.com/random/360x360/?men" alt="">
+                        <svg id="sv4" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>otus</p>
+                    </div>
+                    <div class="id" id="svg5"><img src="https://source.unsplash.com/random/360x360/?nasa" alt="">
+                        <svg id="sv5" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>nasa</p>
+                    </div>
+                    <div class="id" id="svg6"><img src="https://source.unsplash.com/random/360x360/?gtr" alt="">
+                        <svg id="sv6" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>Gtr</p>
+                    </div>
+                    <div class="id" id="svg7"><img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
+                        <svg id="sv7" height="70" width="70">
+                            <circle cx="35" cy="35" r="32" fill="none">
+                        </svg>
+                        <p>Q_Lines</p>
+                    </div>
                 </div>
-                <div class="id" id="svg2"><img src="https://source.unsplash.com/random/360x360/?coding" alt="">
-                    <svg id="sv2" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>code_hub</p>
-                </div>
-                <div class="id" id="svg3"><img src="https://source.unsplash.com/random/360x360/?women" alt="">
-                    <svg id="sv3" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>stacy grand</p>
-                </div>
-                <div class="id" id="svg4"><img src="https://source.unsplash.com/random/360x360/?men" alt="">
-                    <svg id="sv4" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>otus</p>
-                </div>
-                <div class="id" id="svg5"><img src="https://source.unsplash.com/random/360x360/?nasa" alt="">
-                    <svg id="sv5" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>nasa</p>
-                </div>
-                <div class="id" id="svg6"><img src="https://source.unsplash.com/random/360x360/?gtr" alt="">
-                    <svg id="sv6" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>Gtr</p>
-                </div>
-                <div class="id" id="svg7"><img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
-                    <svg id="sv7" height="70" width="70">
-                        <circle cx="35" cy="35" r="32" fill="none">
-                    </svg>
-                    <p>Q_Lines</p>
-                </div>
-            </div>
             </div>
             <?php
-include "config.php";
+            include "config.php";
 
-$sql="select * from posts ORDER BY post_id DESC";
+            $sql = "select * from posts ORDER BY post_id DESC";
 
-$result=mysqli_query($conn,$sql) or die("Query failed");
-
-
-
-if(mysqli_num_rows($result) > 0) {
+            $result = mysqli_query($conn, $sql) or die("Query failed");
 
 
 
-while($row=mysqli_fetch_assoc($result))
+            if (mysqli_num_rows($result) > 0) {
 
-{
+
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="post">
+                        <div class="posthead">
+                            <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
+                                    height="40"></div>
+                            <div>
+                                <li style="font-size: 15px; display: flex; align-items: center">
+                                    <pr style="margin-right: 3px; font-weight: 600;">
+                                        <?php echo $row["uid1"]; ?>
+                                    </pr><img src="./images/pinpng.com-instagram-symbol-png-102490.png" height="14" alt="">
+                                </li>
+                                <li class="profile-loc">
+                                    <?php echo $row["location1"]; ?>
+                                </li>
+                            </div>
+
+                            <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
+                        </div>
+                        <div id="dbl-ani1" class="post-anim">
+                            <img id="ani1" src="./images/whiteh.png" alt="">
+                            <img class="pic" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
+                        </div>
+                        <div class="postbottom">
+                            <div class="bottom_menu">
+                                <div><img id="heart1" src="./images/heart.png" alt="" height="24"></div>
+                                <div><img src="./images/bubble-chat.png" alt="" height="25"></div>
+                                <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
+                                <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
+                            </div>
+                            <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">2,99,792
+                                likes</div>
+                            <div class="bottom-menu-margin" style="font-size: 15px;">
+                                <pr style="margin-right: 5px; font-weight: 700;">
+                                    <?php echo $_SESSION["username"]; ?>
+                                </pr>
+                                <?php echo $row["caption"]; ?>
+                            </div>
+                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all
+                                1.1M comments</div>
+                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a
+                                comment</div>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
             ?>
-            <div class="post">
-                <div class="posthead">
-                    <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
-                            height="40"></div>
-                    <div>
-                        <li style="font-size: 15px; display: flex; align-items: center">
-                            <pr style="margin-right: 3px; font-weight: 600;"><?php echo $row["uid1"]; ?></pr><img
-                                src="./images/pinpng.com-instagram-symbol-png-102490.png" height="14" alt="">
-                        </li>
-                        <li class="profile-loc"><?php echo $row["location1"]; ?></li>
-                    </div>
-
-                    <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
-                </div>
-                <div id="dbl-ani1" class="post-anim">
-                    <img id="ani1" src="./images/whiteh.png" alt="">
-                    <img class="pic" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
-                </div>
-                <div class="postbottom">
-                    <div class="bottom_menu">
-                        <div><img id="heart1" src="./images/heart.png" alt="" height="24"></div>
-                        <div><img src="./images/bubble-chat.png" alt="" height="25"></div>
-                        <div><img src="./images/send.png" alt="" height="22"></div>
-                        <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
-                    </div>
-                    <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">2,99,792 likes</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px;">
-                        <pr style="margin-right: 5px; font-weight: 700;"><?php echo $_SESSION["username"]; ?></pr><?php echo $row["caption"]; ?>
-                    </div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all 1.1M comments</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a comment</div>
-                </div>
-</div>
-            <?php
-}
-}
-            ?>
-            <!-- <div class="post">
-                <div class="posthead">
-                    <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?coding" height="40">
-                    </div>
-                    <div>
-                        <li style="font-size: 15px;">web_tech.</li>
-                        <li class="profile-loc">Banglore,India</li>
-                    </div>
-
-                    <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
-                </div>
-                <div id="dbl-ani2" class="post-anim">
-                    <img id="ani2" src="./images/whiteh.png" alt="">
-                    <img class="pic" src="https://source.unsplash.com/random/1280x1440/?coding" alt="">
-                </div>
-                <div class="postbottom">
-                    <div class="bottom_menu">
-                        <div><img id="heart2" src="./images/heart.png" alt="" height="24"></div>
-                        <div><img src="./images/bubble-chat.png" alt="" height="25"></div>
-                        <div><img src="./images/send.png" alt="" height="22"></div>
-                        <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
-                    </div>
-                    <div class="bottom-menu-margin" id="number2" style="font-size: 15px; font-weight: 700;">76,792 likes</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px;">
-                        <pr style="margin-right: 5px; font-weight: 700;">web_tech</pr>Frontend Developer Checklist and
-                        Roadmap
-                    </div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all 3.7k comments</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a comment</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="posthead">
-                    <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?nasa" alt=""
-                            height="40"></div>
-                    <div>
-                        <li style="font-size: 15px; display: flex; align-items: center">
-                            <pr style="margin-right: 3px; font-weight: 600;">nasa</pr><img
-                                src="./images/pinpng.com-instagram-symbol-png-102490.png" height="14" alt="">
-                        </li>
-                        <li class="profile-loc">Washington,USA</li>
-                    </div>
-
-                    <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
-                </div>
-                <div id="dbl-ani3" class="post-anim">
-                    <img id="ani3" src="./images/whiteh.png" alt="">
-                    <img class="pic" src="https://source.unsplash.com/random/1280x1440/?nasa" alt="">
-                </div>
-                <div class="postbottom">
-                    <div class="bottom_menu">
-                        <div><img id="heart3" src="./images/heart.png" alt="" height="24"></div>
-                        <div><img src="./images/bubble-chat.png" alt="" height="25"></div>
-                        <div><img src="./images/send.png" alt="" height="22"></div>
-                        <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
-                    </div>
-                    <div class="bottom-menu-margin" id="number3" style="font-size: 15px; font-weight: 700;">9,99,792 likes</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px;">
-                        <pr style="margin-right: 5px; font-weight: 700;">nasa</pr>Exploring the universe and our home
-                        planet.
-                    </div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all 6.7M comments</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a comment</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="posthead">
-                    <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?nature" alt=""
-                            height="40"></div>
-                    <div>
-                        <li style="font-size: 15px; display: flex; align-items: center">
-                            <pr style="margin-right: 3px; font-weight: 600;">infinity_world</pr><img
-                                src="./images/pinpng.com-instagram-symbol-png-102490.png" height="14" alt="">
-                        </li>
-                        <li class="profile-loc">earth</li>
-                    </div>
-
-                    <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
-                </div>
-                <div id="dbl-ani4" class="post-anim">
-                    <img id="ani4" src="./images/whiteh.png" alt="">
-                    <img class="pic" src="https://source.unsplash.com/random/1280x1440/?animals/nature" alt="">
-                </div>
-                <div class="postbottom">
-                    <div class="bottom_menu">
-                        <div><img id="heart4" src="./images/heart.png" alt="" height="24"></div>
-                        <div><img src="./images/bubble-chat.png" alt="" height="25"></div>
-                        <div><img src="./images/send.png" alt="" height="22"></div>
-                        <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
-                    </div>
-                    <div class="bottom-menu-margin" id="number4" style="font-size: 15px; font-weight: 700;">24,056 likes</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px;">
-                        <pr style="margin-right: 5px; font-weight: 700;">infinity_world</pr>The purpose of life is to
-                        live.
-                    </div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all 3k comments</div>
-                    <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a comment</div>
-                </div>
-            </div> -->
+            
         </div>
         <div class="menu-bottom">
             <div id="hover1" class="menu-bar home">
                 <div><img src="./images/home.jpg" alt="home"></div>
             </div>
-            <a class="postman" href="search.html">
+            <a class="postman" href="search.php">
                 <div id="hover2" class="menu-bar find">
                     <div><img src="./images/search.png" alt="search"></div>
                 </div>
             </a>
-            <div id="hover4" class="menu-bar">
-                <div><img src="./images/story.png" alt="add"></div>
-            </div>
-            <div id="hover6" class="menu-bar">
+            <a class="postman" href="create.php">
+                <div id="hover4" class="menu-bar">
+                    <div><img src="./images/story.png" alt="add"></div>
+                </div>
+            </a>
+            <!-- <div id="hover6" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
-            </div>
-            <div id="hover7" class="menu-bar">
-                <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
-            </div>
+            </div> -->
+            <a class="postman" href="profile.php">
+                <div id="hover7" class="menu-bar">
+                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                </div>
+            </a>
         </div>
 
         <div class="menu menu2">
-           
- 
-            
+
+
+
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="./images/3~2.jpg" alt="" height="55"></div>
                 <div>
-                    <li style="font-size: 15px;"><?php echo $_SESSION["username"]; ?></li>
-                    <li class="profile-loc"><?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"]; ?></li>
-                    </div>
+                    <li style="font-size: 15px;">
+                        <?php echo $_SESSION["username"]; ?>
+                    </li>
+                    <li class="profile-loc">
+                        <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?>
+                    </li>
+                </div>
                 <div>
-                    <form action="Logout.php" method="post">  
-                        <button id="logout" type="submit" value="Logout" >Logout</button>
+                    <form action="Logout.php" method="post">
+                        <button id="logout" type="submit" value="Logout">Logout</button>
                     </form>
                 </div>
             </div>

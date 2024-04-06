@@ -144,7 +144,7 @@
 
 .posts {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
     width: 420px;
     overflow-y: scroll;
     overflow-x: hidden;
