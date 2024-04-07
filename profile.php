@@ -109,6 +109,92 @@ if (!isset($_SESSION["username"])) {
       background-color: rgb(241, 244, 255);
     }
 
+    input {
+      position: relative;
+      margin: 10px 0px;
+      height: 80px;
+      border-radius: 8px;
+    }
+
+    input[type=file] {
+      width: 300px;
+    }
+
+    #image-preview {
+      width: 150px;
+      height: 150px;
+      margin: 10px;
+      border-radius: 50%;
+      background-color: rgb(214, 214, 215);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-container img {
+      max-width: 150px;
+      width: auto;
+      max-height: 150px;
+      height: auto;
+    }
+
+
+    label {
+      height: 25px;
+      width: 130px;
+      margin: 0px 15px;
+      color: white;
+      background-color: rgb(39, 154, 248);
+      border-radius: 7px;
+      text-align: center;
+    }
+
+    button {
+      height: 25px;
+      width: 130px;
+      margin: 0px 15px;
+      color: white;
+      background-color: rgb(39, 154, 248);
+      border-radius: 7px;
+      border: none;
+    }
+
+    .profile-container-edit{
+      flex-direction: column;
+      height: 480px;
+    }
+
+    #edit-profile {
+      height: 100vh;
+      width: 100vw;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      backdrop-filter: blur(2px);
+    }
+
+    .edit-inner-profile {
+      background: #0d4493;
+      margin: 10px;
+      padding: 30px;
+      height: 480px;
+      border-radius: 20px;
+    }
+
+    .edit-profile-credits{
+      height: 290px;
+      align-items: center;
+    }
+
+
+
+
+
+
+
+
+
     @media only screen and (max-width:950px) {
       .posts {
         width: 600px;
@@ -145,12 +231,19 @@ if (!isset($_SESSION["username"])) {
       .frame {
         grid-template-columns: auto auto;
       }
+      input{
+        width: 280px;
+      }
     }
 
     @media only screen and (max-width:630px) {
       .menu {
         border: none;
       }
+
+      /* .edit-inner-profile {
+        width: 90%;
+      } */
     }
 
     @media screen and (max-width:500px) {
@@ -166,7 +259,17 @@ if (!isset($_SESSION["username"])) {
       #logo {
         margin: 0px 10px;
       }
+      
+      .edit-inner-profile {
+        width: 100vw;
+      }
 
+      button{
+        width: 90px;
+      }
+      input{
+        width: 200px;
+      }
       .menu-top {
         position: fixed;
         top: 0;
@@ -273,7 +376,9 @@ if (!isset($_SESSION["username"])) {
         <div class="profile-container">
           <img src="images/3~2.jpg" alt="">
           <div class="profile-credits">
-            <h2>_navi_0048</h2>
+            <div style="display: flex; align-items: center;">
+              <h2>_navi_0048</h2><button id="edit-profile-button" type="submit">Edit Profile</button>
+            </div>
             <ul>
               <li><span style="font-weight: bold">0</span> Posts</li>
               <li><span style="font-weight: bold">500</span> followers</li>
@@ -315,11 +420,41 @@ if (!isset($_SESSION["username"])) {
         echo "<h1>No post<?h1>";
       }
       ?>
+
+    <!-- Edit Profile -->
+    <div id="edit-profile">
+      <div style="margin-top: 0;" class="profile edit-inner-profile">
+        <div class="profile-container profile-container-edit">
+          <div id="image-preview">
+            <img style="height: 150px" id="preview" alt="">
+          </div>
+          <form action="">
+          <div class="profile-credits edit-profile-credits">
+            <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)"
+              hidden />
+            <label for="choose-file">Update Image</label>
+            <input type="text" name="caption" placeholder="change Username">
+            <input type="text" name="caption" placeholder="change Firstname">
+            <input type="text" name="caption" placeholder="change Lastname">
+            <input type="text" name="loc" placeholder="update bio">
+            <div style="display: flex; align-items: center;">
+            <button id="edit-cancel-button" type="cancel">cancel</button><button type="submit">Update</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
     <div class="menu-top">
       <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
       <!-- <div><img src="./images/heart.png" alt="notification"></div> -->
       <div><img src="./images/menu.png" alt="menu"></div>
     </div>
+
+
+
     <div class="menu-bottom">
       <a class="postman" href="main.php">
         <div id="hover1" class="menu-bar home">
@@ -344,6 +479,32 @@ if (!isset($_SESSION["username"])) {
       </div>
     </div>
   </div>
+
+  <script>
+    function previewImage(event) {
+      var input = event.target;
+      var image = document.getElementById('preview');
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          image.src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    let edit_profile = document.getElementById("edit-profile-button")
+    let edit_profile_div = document.getElementById("edit-profile")
+    let edit_cancel_button =document.getElementById("edit-cancel-button")
+
+    edit_profile.addEventListener("click", () => {
+      edit_profile_div.style.display = "flex"
+    })
+
+    edit_cancel_button.addEventListener("click", () => {
+      edit_profile_div.style.display = "none"
+    })
+  </script>
 
 </body>
 
