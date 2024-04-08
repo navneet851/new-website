@@ -176,17 +176,38 @@ if (!isset($_SESSION["username"])) {
                                 </pr>
                                 <?php echo $row["caption"]; ?>
                             </div>
-                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">View all
-                                1.1M comments</div>
-                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7; cursor: pointer;">Add a
-                                comment</div>
+                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;">0 comments</div>
+                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;
+                                                                    display: flex; justify-content: space-between;">
+                                <input type="text" placeholder="Add a comment"><button>Add</button>
+                            </div>
+                            <div id="post-comments">
+                                <ul class="posthead">
+                                    <li class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
+                                            height="25"></li>
+                                    <li>
+                                        <div style="font-size: 15px;  font-weight: bold;">
+                                                <?php echo $row["uid1"]; ?>
+                                        </div>
+                                    </li>
+                                    <li style="font-size: 14px; margin-left: 5px; ">fbjhfhfiudfhuef</li>
+                                </ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                                <ul>fefe</ul>
+                            </div>
                         </div>
                     </div>
                     <?php
                 }
             }
             ?>
-            
+
         </div>
         <div class="menu-bottom">
             <div id="hover1" class="menu-bar home">

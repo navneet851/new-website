@@ -273,12 +273,43 @@ svg {
 
 .bottom_menu {
     display: grid;
-    grid-template-columns: 0.13fr 0.17fr 1.5fr;
+    grid-template-columns: 0.08fr 0.17fr 1.5fr;
     align-items: center;
     text-align: right;
     margin: 0px 5px;
 }
+.bottom-menu-margin input{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 
+.bottom-menu-margin input:focus{
+    border-bottom: 1px solid rgb(180, 163, 163);
+}
+button {
+    height: 30px;
+    color: rgb(39, 67, 248);
+    background: white;
+    border: none;
+    cursor: pointer;
+}
+#post-comments{
+    border: 1px solid rgb(255, 239, 228);
+    border-radius: 10px;
+    padding: 10px;
+    overflow: scroll;
+}
+#post-comments::-webkit-scrollbar {
+    display: none;
+}
+#post-comments ul li{
+    list-style: none;
+}
+#post-comments .posthead{
+    grid-template-columns: 0.5fr 1fr 4.5fr;
+    border-bottom: 1px solid rgb(255, 239, 228);
+}
 .menu-top {
     display: none;
 }
