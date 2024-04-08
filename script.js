@@ -158,3 +158,10 @@ heart4.addEventListener("click", () => {
         number4.innerHTML = "24,057 likes";
     }
 })
+
+let open_comments = document.getElementById("open-comments")
+let post_comments = document.getElementById("post-comments")
+
+open_comments.addEventListener("click", () => {
+    post_comments.style.display = "block"
+})

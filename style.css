@@ -295,13 +295,17 @@ button {
     cursor: pointer;
 }
 #post-comments{
+    display: none;
     border: 1px solid rgb(255, 239, 228);
     border-radius: 10px;
     padding: 10px;
-    overflow: scroll;
+    height: 120px;
+    overflow-y: scroll;
 }
 #post-comments::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
+    border-radius: 10px;
+    background-color: rgb(255, 246, 240);
 }
 #post-comments ul li{
     list-style: none;
@@ -309,6 +313,7 @@ button {
 #post-comments .posthead{
     grid-template-columns: 0.5fr 1fr 4.5fr;
     border-bottom: 1px solid rgb(255, 239, 228);
+    padding: 3px;
 }
 .menu-top {
     display: none;
