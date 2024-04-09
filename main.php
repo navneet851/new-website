@@ -164,7 +164,7 @@ if (!isset($_SESSION["username"])) {
                         <div class="postbottom">
                             <div class="bottom_menu">
                                 <div><img id="heart1" src="./images/heart.png" alt="" height="24"></div>
-                                <div id="open-comments"><img src="./images/bubble-chat.png" alt="" height="25"></div>
+                                <div id="open-comments"><img id="open-comments" src="./images/bubble-chat.png" alt="" height="25"></div>
                                 <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
                                 <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
                             </div>
