@@ -155,7 +155,11 @@ if (!isset($_SESSION["username"])) {
                                 </li>
                             </div>
 
-                            <div><img src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
+                            <div><img id="three-dot-opener" src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
+                            <ul id="three-dot-options">
+                                <li>Remove Post</li>
+                                <li>gfgf</li>
+                            </ul>
                         </div>
                         <div id="dbl-ani1" class="post-anim">
                             <img id="ani1" src="./images/whiteh.png" alt="">

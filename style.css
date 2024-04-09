@@ -234,6 +234,29 @@ svg {
 .menu2 div {
     margin: 3px;
 }
+.posthead{
+    position: relative;
+}
+#three-dot-options{
+    display: none;
+    border-radius: 7px;
+    background-color: #fff7f7;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    z-index: 100;
+}
+#three-dot-options li{
+    list-style: none;
+    padding: 5px;
+    margin: 5px;
+    font-size: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+#three-dot-options li:hover{
+    background-color: #f0ecec;
+}
 
 .profile-main {
     padding-top: 35px;
@@ -302,9 +325,11 @@ button {
     padding: 10px;
     height: 120px;
     overflow-y: scroll;
+
 }
 #post-comments::-webkit-scrollbar {
     /* display: none; */
+    overflow-x: hidden;
     border-radius: 10px;
     background-color: rgb(255, 246, 240);
 }

@@ -111,6 +111,19 @@ open_comments.addEventListener("click", () => {
   
 })
 
+let three_dot_opener = document.getElementById("three-dot-opener");
+let three_dot_options = document.getElementById("three-dot-options");
+
+three_dot_opener.addEventListener("click", () => {
+    if(three_dot_options.style.display == "none"){
+        three_dot_options.style.display = "block";
+    }
+    else{
+        three_dot_options.style.display = "none";
+    }
+  
+})
+
 // function bookmark() {
 // 	let Image = document.getElementById('bkmark');
 // 	if (Image.src.match("bookmark-white")) {
