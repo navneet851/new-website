@@ -377,7 +377,13 @@ if (!isset($_SESSION["username"])) {
           <img src="images/3~2.jpg" alt="">
           <div class="profile-credits">
             <div style="display: flex; align-items: center;">
-              <h2>_navi_0048</h2><button id="edit-profile-button" type="submit">Edit Profile</button>
+  
+                   
+              <h2>_navi_0048</h2><button id="edit-profile-button" type="submit"  >Edit Profile</button>
+  
+
+
+           
             </div>
             <ul>
               <li><span style="font-weight: bold">0</span> Posts</li>
@@ -419,6 +425,16 @@ if (!isset($_SESSION["username"])) {
       } else {
         echo "<h1>No post<?h1>";
       }
+
+  
+include "config.php";
+$userid=   $_SESSION["user_id"];
+$sql = "SELECT user_id, firstname, lastname, username, password1
+        FROM register 
+        WHERE user_id='{$userid}'";
+$result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
+if(mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
       ?>
 
     <!-- Edit Profile -->
@@ -433,8 +449,8 @@ if (!isset($_SESSION["username"])) {
             <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)"
               hidden />
             <label for="choose-file">Update Image</label>
-            <input type="text" name="caption" placeholder="change Username">
-            <input type="text" name="caption" placeholder="change Firstname">
+            <input type="text" name="caption" placeholder="change Username" value="gfg">
+            <input type="text" name="caption" placeholder="change Firstname" value="gfnf">
             <input type="text" name="caption" placeholder="change Lastname">
             <input type="text" name="loc" placeholder="update bio">
             <div style="display: flex; align-items: center;">
@@ -446,7 +462,10 @@ if (!isset($_SESSION["username"])) {
       </div>
     </div>
 
-
+    <?php
+       }}
+    ?>
+ 
     <div class="menu-top">
       <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
       <!-- <div><img src="./images/heart.png" alt="notification"></div> -->
@@ -492,6 +511,7 @@ if (!isset($_SESSION["username"])) {
         reader.readAsDataURL(input.files[0]);
       }
     }
+ 
 
     let edit_profile = document.getElementById("edit-profile-button")
     let edit_profile_div = document.getElementById("edit-profile")
@@ -499,11 +519,15 @@ if (!isset($_SESSION["username"])) {
 
     edit_profile.addEventListener("click", () => {
       edit_profile_div.style.display = "flex"
+      
     })
 
     edit_cancel_button.addEventListener("click", () => {
       edit_profile_div.style.display = "none"
     })
+
+
+
   </script>
 
 </body>
