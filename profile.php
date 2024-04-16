@@ -131,6 +131,10 @@ if (!isset($_SESSION["username"])) {
       justify-content: center;
     }
 
+    #image-preview img {
+      object-fit: cover;
+    }
+
     .profile-container img {
       max-width: 150px;
       width: auto;
@@ -159,7 +163,7 @@ if (!isset($_SESSION["username"])) {
       border: none;
     }
 
-    .profile-container-edit{
+    .profile-container-edit {
       flex-direction: column;
       height: 480px;
     }
@@ -182,7 +186,7 @@ if (!isset($_SESSION["username"])) {
       border-radius: 20px;
     }
 
-    .edit-profile-credits{
+    .edit-profile-credits {
       height: 290px;
       align-items: center;
     }
@@ -231,7 +235,8 @@ if (!isset($_SESSION["username"])) {
       .frame {
         grid-template-columns: auto auto;
       }
-      input{
+
+      input {
         width: 280px;
       }
     }
@@ -259,17 +264,19 @@ if (!isset($_SESSION["username"])) {
       #logo {
         margin: 0px 10px;
       }
-      
+
       .edit-inner-profile {
         width: 100vw;
       }
 
-      button{
+      button {
         width: 90px;
       }
-      input{
+
+      input {
         width: 200px;
       }
+
       .menu-top {
         position: fixed;
         top: 0;
@@ -377,20 +384,20 @@ if (!isset($_SESSION["username"])) {
           <img src="images/3~2.jpg" alt="">
           <div class="profile-credits">
             <div style="display: flex; align-items: center;">
-  
-                   
-              <h2>_navi_0048</h2><button id="edit-profile-button" type="submit"  >Edit Profile</button>
-  
 
 
-           
+              <h3><?php echo $_SESSION["username"]; ?></h3><button id="edit-profile-button" type="submit">Edit Profile</button>
+
+
+
+
             </div>
             <ul>
               <li><span style="font-weight: bold">0</span> Posts</li>
               <li><span style="font-weight: bold">500</span> followers</li>
               <li><span style="font-weight: bold">100</span> following</li>
             </ul>
-            <h4>Navneet Yadav</h4>
+            <h4><?php echo ucfirst($_SESSION["firstname"]) . " " . ucfirst($_SESSION["lastname"]); ?></h4>
             <p>#spacious</p>
           </div>
         </div>
@@ -426,46 +433,61 @@ if (!isset($_SESSION["username"])) {
         echo "<h1>No post<?h1>";
       }
 
-  
-include "config.php";
-$userid=   $_SESSION["user_id"];
-$sql = "SELECT user_id, firstname, lastname, username, password1
-        FROM register 
-        WHERE user_id='{$userid}'";
-$result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
-if(mysqli_num_rows($result) > 0) {
-  while ($row = mysqli_fetch_assoc($result)) {
+
+
       ?>
 
     <!-- Edit Profile -->
     <div id="edit-profile">
       <div style="margin-top: 0;" class="profile edit-inner-profile">
         <div class="profile-container profile-container-edit">
-          <div id="image-preview">
-            <img style="height: 150px" id="preview" alt="">
-          </div>
-          <form action="">
-          <div class="profile-credits edit-profile-credits">
-            <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)"
-              hidden />
-            <label for="choose-file">Update Image</label>
-            <input type="text" name="caption" placeholder="change Username" value="gfg">
-            <input type="text" name="caption" placeholder="change Firstname" value="gfnf">
-            <input type="text" name="caption" placeholder="change Lastname">
-            <input type="text" name="loc" placeholder="update bio">
-            <div style="display: flex; align-items: center;">
-            <button id="edit-cancel-button" type="cancel">cancel</button><button type="submit">Update</button>
+
+          <?php
+
+          include "config.php";
+
+          $userid = $_SESSION["user_id"];
+
+          $sql = "SELECT * FROM register WHERE user_id={$userid}";
+
+          $result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
+          if (mysqli_num_rows($result) > 0) {
+
+
+            ?>
+            <div id="image-preview">
+              <img style="height: 150px" id="preview" alt="" src="images/<?php echo $row['profile_img']; ?>">
             </div>
-          </div>
-          </form>
+            <form action="update-profile.php" method="POST">
+              <div class="profile-credits edit-profile-credits">
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                  ?>
+                  <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)"
+                    hidden />
+                  <label for="choose-file">Update Image</label>
+                  <input type="text" name="username" placeholder="change Username" value="<?php echo $row['username']; ?>">
+                  <input type="text" name="firstname" placeholder="change Firstname"
+                    value="<?php echo $row['firstname']; ?>">
+                  <input type="text" name="lastname" placeholder="change Lastname" value="<?php echo $row['lastname']; ?>">
+                  <input type="text" name="bio" placeholder="update bio" value="<?php echo $row['bio']; ?>">
+                  <div style="display: flex; align-items: center;">
+                    <button id="edit-cancel-button" type="cancel">cancel</button><button type="submit">Update</button>
+                    <?php
+                }
+                ?>
+                </div>
+              </div>
+            </form>
+            <?php
+          }
+          ?>
         </div>
       </div>
     </div>
 
-    <?php
-       }}
-    ?>
- 
+
+
     <div class="menu-top">
       <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
       <!-- <div><img src="./images/heart.png" alt="notification"></div> -->
@@ -511,15 +533,15 @@ if(mysqli_num_rows($result) > 0) {
         reader.readAsDataURL(input.files[0]);
       }
     }
- 
+
 
     let edit_profile = document.getElementById("edit-profile-button")
     let edit_profile_div = document.getElementById("edit-profile")
-    let edit_cancel_button =document.getElementById("edit-cancel-button")
+    let edit_cancel_button = document.getElementById("edit-cancel-button")
 
     edit_profile.addEventListener("click", () => {
       edit_profile_div.style.display = "flex"
-      
+
     })
 
     edit_cancel_button.addEventListener("click", () => {

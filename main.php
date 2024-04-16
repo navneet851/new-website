@@ -248,7 +248,7 @@ if (!isset($_SESSION["username"])) {
                         <?php echo $_SESSION["username"]; ?>
                     </li>
                     <li class="profile-loc">
-                        <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?>
+                        <?php echo ucfirst($_SESSION["firstname"]) . " " . ucfirst($_SESSION["lastname"]); ?>
                     </li>
                 </div>
                 <div>
