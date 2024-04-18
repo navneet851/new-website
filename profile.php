@@ -453,31 +453,38 @@ if (!isset($_SESSION["username"])) {
           $result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
           if (mysqli_num_rows($result) > 0) {
 
-
+           
             ?>
-            <div id="image-preview">
+             
+          
+            <form action="update-profile.php" method="POST">
+            <?php
+                while ($row=mysqli_fetch_assoc($result)) {
+                  
+                  ?>
+              <div class="profile-credits edit-profile-credits">
+            
+              <div id="image-preview">
               <img style="height: 150px" id="preview" alt="" src="images/<?php echo $row['profile_img']; ?>">
             </div>
-            <form action="update-profile.php" method="POST">
-              <div class="profile-credits edit-profile-credits">
-                <?php
-                while ($row = mysqli_fetch_assoc($result)) {
-                  ?>
                   <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)"
                     hidden />
                   <label for="choose-file">Update Image</label>
                   <input type="text" name="username" placeholder="change Username" value="<?php echo $row['username']; ?>">
+                  <input type="text" name="old_img" placeholder="change Username" value="<?php echo $row['profile_img']; ?>">
                   <input type="text" name="firstname" placeholder="change Firstname"
                     value="<?php echo $row['firstname']; ?>">
                   <input type="text" name="lastname" placeholder="change Lastname" value="<?php echo $row['lastname']; ?>">
                   <input type="text" name="bio" placeholder="update bio" value="<?php echo $row['bio']; ?>">
                   <div style="display: flex; align-items: center;">
                     <button id="edit-cancel-button" type="cancel">cancel</button><button type="submit">Update</button>
-                    <?php
+             
+                </div>
+           
+              </div>
+              <?php
                 }
                 ?>
-                </div>
-              </div>
             </form>
             <?php
           }

@@ -141,6 +141,7 @@ if (!isset($_SESSION["username"])) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                     <div class="post">
+
                         <div class="posthead">
                             <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
                                     height="40"></div>
@@ -155,7 +156,8 @@ if (!isset($_SESSION["username"])) {
                                 </li>
                             </div>
 
-                            <div><img id="three-dot-opener" src="./images/dots-three-vertical-3601841-3003583.png" alt="" height="22"></div>
+                            <div><img id="three-dot-opener" src="./images/dots-three-vertical-3601841-3003583.png" alt=""
+                                    height="22"></div>
                             <ul id="three-dot-options">
                                 <li>Remove Post</li>
                                 <li>gfgf</li>
@@ -168,7 +170,8 @@ if (!isset($_SESSION["username"])) {
                         <div class="postbottom">
                             <div class="bottom_menu">
                                 <div><img id="heart1" src="./images/heart.png" alt="" height="24"></div>
-                                <div id="open-comments"><img id="open-comments" src="./images/bubble-chat.png" alt="" height="25"></div>
+                                <div id="open-comments"><img id="open-comments" src="./images/bubble-chat.png" alt=""
+                                        height="25"></div>
                                 <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
                                 <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
                             </div>
@@ -183,35 +186,64 @@ if (!isset($_SESSION["username"])) {
                             <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;">0 comments</div>
                             <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;
                                                                     display: flex; justify-content: space-between;">
-                                <input type="text" placeholder="Add a comment"><button>Add</button>
+                                <form action="add-comment.php" method="post">
+                                    <input type="hidden" placeholder="Add a comment" name="pid"
+                                        value="<?php echo $row["post_id"]; ?>">
+                                    <input type="hidden" placeholder="Add a comment" name="uname"
+                                        value="<?php echo $_SESSION["username"]; ?>">
+                                    <input type="text" placeholder="Add a comment" name="user-comment"><button
+                                        type="submit">Add</button>
+                                </form>
+
                             </div>
-                            <div id="post-comments">
-                                <ul class="posthead">
-                                    <li class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
-                                            height="25"></li>
-                                    <li>
-                                        <div style="font-size: 15px;  font-weight: bold;">
-                                                <?php echo $row["uid1"]; ?>
-                                        </div>
-                                    </li>
-                                    <li style="font-size: 14px; margin-left: 5px; ">fbjhfhfiudfhuef</li>
-                                </ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                                <ul>fefe</ul>
-                            </div>
+
+                            <?php
+                            include "config.php";
+
+                            $sql = "select *
+                             from user_comment 
+                          where  post_id={$row["post_id"]}
+                
+                          ";
+
+                            $result = mysqli_query($conn, $sql) or die("Query failed");
+
+
+
+
+                            if (mysqli_num_rows($result) > 0) {
+
+
+
+                                ?>
+
+                                <div id="post-comments">
+                                    <?php
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                        <ul class="posthead">
+                                            <li class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
+                                                    height="25"></li>
+                                            <li>
+                                                <div style="font-size: 15px;  font-weight: bold;">
+                                                    <?php echo $row["username"]; ?>
+                                                </div>
+                                            </li>
+                                            <li style="font-size: 14px; margin-left: 5px; "><?php echo $row["user_comment"]; ?></li>
+                                        </ul>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <?php
                 }
             }
             ?>
-
         </div>
         <div class="menu-bottom">
             <div id="hover1" class="menu-bar home">
