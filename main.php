@@ -80,6 +80,7 @@ if (!isset($_SESSION["username"])) {
         </div>
         <div class="main menu menu1">
             <div class="story-outer">
+                
                 <div class="story">
                     <div class="id" id="svg"><img src="./images/3~2.jpg" alt="">
                         <svg id="sv" height="70" width="70">
@@ -130,15 +131,14 @@ if (!isset($_SESSION["username"])) {
 
             $sql = "select * from posts ORDER BY post_id DESC";
 
-            $result = mysqli_query($conn, $sql) or die("Query failed");
+            // $result = mysqli_query($conn,$sql) or die("Query failed");
 
-
+            $result = mysqli_query($conn,$sql)  or  die('Invalid query: ' . mysqli_error($conn));
 
             if (mysqli_num_rows($result) > 0) {
 
-
-
-                while ($row = mysqli_fetch_assoc($result)) {
+                 while($row=mysqli_fetch_assoc($result)) {
+               
                     ?>
                     <div class="post">
 
@@ -183,7 +183,29 @@ if (!isset($_SESSION["username"])) {
                                 </pr>
                                 <?php echo $row["caption"]; ?>
                             </div>
-                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;">0 comments</div>
+                            <?php
+               
+                            include "config.php";
+
+                            $sql = "select *
+                             from user_comment 
+                          where  post_id={$row["post_id"]} Order by comment_id DESC
+                
+                          ";
+
+                            $result = mysqli_query($conn, $sql) or die("Query failed");
+
+                            
+                           if(mysqli_num_rows($result) >0 ){
+                            $i=mysqli_num_rows($result);
+                           }
+                           else{
+                            $i=0;
+                           }
+                       
+
+                                ?>
+                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;"><?php echo $i ?> comments</div>
                             <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;
                                                                     display: flex; justify-content: space-between;">
                                 <form action="add-comment.php" method="post">
@@ -198,11 +220,12 @@ if (!isset($_SESSION["username"])) {
                             </div>
 
                             <?php
+                
                             include "config.php";
 
                             $sql = "select *
                              from user_comment 
-                          where  post_id={$row["post_id"]}
+                          where  post_id={$row["post_id"]} Order by comment_id DESC
                 
                           ";
 
@@ -237,14 +260,17 @@ if (!isset($_SESSION["username"])) {
                                 </div>
                                 <?php
                             }
+                        
                             ?>
                         </div>
+        
                     </div>
                     <?php
+   }
                 }
-            }
             ?>
         </div>
+     
         <div class="menu-bottom">
             <div id="hover1" class="menu-bar home">
                 <div><img src="./images/home.jpg" alt="home"></div>
