@@ -73,6 +73,32 @@ if (!isset($_SESSION["username"])) {
         <div class="search">
             <input type="text" placeholder="Search" autocomplete="on" autofocus>
 
+            <div class="profiles">
+            <?php
+            include "config.php";
+            $users_sql = "select * from register ORDER BY user_id DESC";
+            // $result = mysqli_query($conn,$sql) or die("Query failed");
+            $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
+
+            if (mysqli_num_rows($users_result) > 0) {
+                while ($users_row = mysqli_fetch_assoc($users_result)) {
+            ?>
+            
+            <a href="user-details.php?user_id=<?php echo $users_row['user_id']; ?>">
+            <div class="posthead suggestions">
+                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/australian" alt=""
+                        height="40"></div>
+                <div>
+                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
+                    <li class="profile-loc"><?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
+                </div>
+            </div>
+            </a>
+            <?php
+                }
+            }
+            ?>
+            </div>
             <div class="posts">
                 <img src="https://source.unsplash.com/random/360x360/?cars" alt="">
                 <img src="https://source.unsplash.com/random/360x360/?animals" alt="">
