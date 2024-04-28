@@ -64,6 +64,14 @@ if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
             text-decoration : none;
             font-size : 13px;
         }
+    
+
+        @media screen and (max-width:500px) {
+            form{
+                /* width: 100%; */
+                border: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -71,7 +79,7 @@ if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
 
     <form action="user.php" method="post">
         <p>
-            <img src="./logo.jpg" alt="" height="70">
+            <img src="images/blogo.png" alt="" height="55">
         </p><br><br><br> 
         <input type="email" name="email" placeholder="E mail"><br>
         <input type="text" name="firstname" placeholder="First Name"><br>

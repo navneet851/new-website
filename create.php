@@ -1,3 +1,15 @@
+<?php
+include "config.php";
+session_start();
+
+if (!isset($_SESSION["username"])) {
+    header('Location: http://localhost:8080/new-website/login.php');
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,7 +140,7 @@
             }
 
             #logo {
-                content: url("./images/instagram-short.png");
+                content: url("./images/blogo.png");
                 height: 32px;
             }
 
@@ -254,10 +266,10 @@
                     <div class="text">Profile</div>
                 </div>
             </a>
-            <div id="hover4" class="menu-bar">
+            <!-- <div id="hover4" class="menu-bar">
                 <div><img src="./images/menu.png" alt="menu"></div>
                 <div class="text">More</div>
-            </div>
+            </div> -->
         </div>
 
         <div class="search">
@@ -281,11 +293,11 @@
             </div>
         </div>
 
-        <div class="menu-top">
+        <!-- <div class="menu-top">
             <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
             <div><img src="./images/heart.png" alt="notification"></div>
             <div><img src="./images/messenger.png" alt="chat"></div>
-        </div>
+        </div> -->
         <div class="menu-bottom">
             <a class="postman" href="main.php">
                 <div id="hover1" class="menu-bar home">

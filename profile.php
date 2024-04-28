@@ -153,7 +153,8 @@ if (!isset($_SESSION["username"])) {
       text-align: center;
     }
 
-    button {
+    #edit-profile-button,
+    .edit-profile-credits button {
       height: 25px;
       width: 130px;
       margin: 0px 15px;
@@ -187,7 +188,7 @@ if (!isset($_SESSION["username"])) {
     }
 
     .edit-profile-credits {
-      height: 290px;
+      height: 490px;
       align-items: center;
     }
 
@@ -228,7 +229,7 @@ if (!isset($_SESSION["username"])) {
       }
 
       #logo {
-        content: url("./images/instagram-short.png");
+        content: url("./images/blogo.png");
         height: 32px;
       }
 
@@ -372,10 +373,14 @@ if (!isset($_SESSION["username"])) {
         <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
         <div class="text">Profile</div>
       </div>
-      <div id="hover4" class="menu-bar">
-        <div><img src="./images/menu.png" alt="menu"></div>
-        <div class="text">More</div>
-      </div>
+      <form action="Logout.php" method="post">
+        <button style="width: 100%; color: black; background: none; border: none" type="submit" value="Logout">
+          <div id="hover4" class="menu-bar">
+            <div><img src="./images/logout.png" alt="logout"></div>
+            <div class="text">Logout</div>
+          </div>
+        </button>
+      </form>
     </div>
 
     <div class="search">
@@ -386,16 +391,28 @@ if (!isset($_SESSION["username"])) {
             <div style="display: flex; align-items: center;">
 
 
-              <h3><?php echo $_SESSION["username"]; ?></h3><button id="edit-profile-button" type="submit">Edit Profile</button>
+              <h3><?php echo $_SESSION["username"]; ?></h3><button id="edit-profile-button" type="submit">Edit
+                Profile</button>
 
 
+              <?php
+              include "config.php";
+              $user_id = $_SESSION["user_id"];
+              $count_sql = "select * from posts where user_id='{$user_id}'";
+              $comment_count_result = mysqli_query($conn, $count_sql) or die("Query failed");
 
+              if (mysqli_num_rows($comment_count_result) > 0) {
+                $i = mysqli_num_rows($comment_count_result);
+              } else {
+                $i = 0;
+              }
+              ?>
 
             </div>
             <ul>
-              <li><span style="font-weight: bold">0</span> Posts</li>
-              <li><span style="font-weight: bold">500</span> followers</li>
-              <li><span style="font-weight: bold">100</span> following</li>
+              <li><span style="font-weight: bold"><?php echo $i ?></span> Posts</li>
+              <!-- <li><span style="font-weight: bold">500</span> followers</li>
+              <li><span style="font-weight: bold">100</span> following</li> -->
             </ul>
             <h4><?php echo ucfirst($_SESSION["firstname"]) . " " . ucfirst($_SESSION["lastname"]); ?></h4>
             <p>#spacious</p>
@@ -453,38 +470,38 @@ if (!isset($_SESSION["username"])) {
           $result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
           if (mysqli_num_rows($result) > 0) {
 
-           
+
             ?>
-             
-          
-            <form action="update-profile.php" method="POST">
-            <?php
-                while ($row=mysqli_fetch_assoc($result)) {
-                  
-                  ?>
-              <div class="profile-credits edit-profile-credits">
-            
-              <div id="image-preview">
-              <img style="height: 150px" id="preview" alt="" src="images/<?php echo $row['profile_img']; ?>">
-            </div>
-                  <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)"
+
+
+            <form action="update-profile1.php" method="POST">
+              <?php
+              while ($row = mysqli_fetch_assoc($result)) {
+
+                ?>
+                <div class="profile-credits edit-profile-credits">
+
+                  <div id="image-preview">
+                    <img style="height: 150px" id="preview" alt="" src="images/<?php echo $row['profile_img']; ?>">
+                  </div>
+                  <input id="choose-file" type="file" name="new-image" accept="image/*" onchange="previewImage(event)"
                     hidden />
                   <label for="choose-file">Update Image</label>
                   <input type="text" name="username" placeholder="change Username" value="<?php echo $row['username']; ?>">
-                  <input type="text" name="old_img" placeholder="change Username" value="<?php echo $row['profile_img']; ?>">
+                  <input type="text" name="old_img" placeholder="old_image" value="<?php echo $row['profile_img']; ?>">
                   <input type="text" name="firstname" placeholder="change Firstname"
                     value="<?php echo $row['firstname']; ?>">
                   <input type="text" name="lastname" placeholder="change Lastname" value="<?php echo $row['lastname']; ?>">
                   <input type="text" name="bio" placeholder="update bio" value="<?php echo $row['bio']; ?>">
                   <div style="display: flex; align-items: center;">
                     <button id="edit-cancel-button" type="cancel">cancel</button><button type="submit">Update</button>
-             
+
+                  </div>
+
                 </div>
-           
-              </div>
-              <?php
-                }
-                ?>
+                <?php
+              }
+              ?>
             </form>
             <?php
           }
@@ -498,7 +515,12 @@ if (!isset($_SESSION["username"])) {
     <div class="menu-top">
       <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
       <!-- <div><img src="./images/heart.png" alt="notification"></div> -->
-      <div><img src="./images/menu.png" alt="menu"></div>
+      <div>
+        <form action="Logout.php" method="post">
+          <button style="width: 100%; color: black; background: none; border: none" type="submit" value="Logout"><img
+              src="./images/logout.png" alt="menu"></button>
+        </form>
+      </div>
     </div>
 
 

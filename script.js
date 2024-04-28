@@ -98,18 +98,25 @@ heart1.addEventListener("click", () => {
   }
 });
 
-let open_comments = document.getElementById("open-comments");
-let post_comments = document.getElementById("post-comments");
+//open comments
 
-open_comments.addEventListener("click", () => {
-    if(post_comments.style.display == "none"){
-        post_comments.style.display = "block";
-    }
-    else{
-        post_comments.style.display = "none";
-    }
+// let open_comments = document.getElementById("open-comments");
+// let post_comments = document.getElementById("post-comments");
+
+// open_comments.addEventListener("click", () => {
+//     if(post_comments.style.display == "none"){
+//         post_comments.style.display = "block";
+//     }
+//     else{
+//         post_comments.style.display = "none";
+//     }
   
-})
+// })
+
+
+
+
+//open post menu
 
 let three_dot_opener = document.getElementById("three-dot-opener");
 let three_dot_options = document.getElementById("three-dot-options");

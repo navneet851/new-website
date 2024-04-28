@@ -67,20 +67,30 @@ if (!isset($_SESSION["username"])) {
                     <div class="text">Profile</div>
                 </div>
             </a>
-            <div id="hover4" class="menu-bar">
-                <div><img src="./images/menu.png" alt="chat"></div>
-                <div class="text">More</div>
-            </div>
+            <form action="Logout.php" method="post">
+                <button style="width: 100%; color: black;" type="submit" value="Logout">
+                    <div id="hover4" class="menu-bar">
+                        <div><img src="./images/logout.png" alt="logout"></div>
+                        <div class="text">Logout</div>
+                    </div>
+                </button>
+            </form>
+
         </div>
         <div class="menu-top">
             <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
             <!-- <div><img src="./images/menu.png" alt="menu"></div> -->
-            <div><img src="./images/menu.png" alt="menu"></div>
+            <div>
+            <form action="Logout.php" method="post">
+                        <button type="submit" value="Logout"><img src="./images/logout.png" alt="menu"></button>
+                    </form>
+                
+            </div>
 
         </div>
         <div class="main menu menu1">
             <div class="story-outer">
-                
+
                 <div class="story">
                     <div class="id" id="svg"><img src="./images/3~2.jpg" alt="">
                         <svg id="sv" height="70" width="70">
@@ -126,20 +136,20 @@ if (!isset($_SESSION["username"])) {
                     </div>
                 </div>
             </div>
+
+
+
+
+            <!-- post loop starting -->
             <?php
             include "config.php";
-
             $sql = "select * from posts ORDER BY post_id DESC";
-
             // $result = mysqli_query($conn,$sql) or die("Query failed");
-
-            $result = mysqli_query($conn,$sql)  or  die('Invalid query: ' . mysqli_error($conn));
+            $result = mysqli_query($conn, $sql) or die('Invalid query: ' . mysqli_error($conn));
 
             if (mysqli_num_rows($result) > 0) {
-
-                 while($row=mysqli_fetch_assoc($result)) {
-               
-                    ?>
+                while ($row = mysqli_fetch_assoc($result)) {
+            ?>
                     <div class="post">
 
                         <div class="posthead">
@@ -165,112 +175,134 @@ if (!isset($_SESSION["username"])) {
                         </div>
                         <div id="dbl-ani1" class="post-anim">
                             <img id="ani1" src="./images/whiteh.png" alt="">
-                            <img class="pic" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
+                            <img class="pic" loading="lazy" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
                         </div>
                         <div class="postbottom">
                             <div class="bottom_menu">
                                 <div><img id="heart1" src="./images/heart.png" alt="" height="24"></div>
-                                <div id="open-comments"><img id="open-comments" src="./images/bubble-chat.png" alt=""
-                                        height="25"></div>
+                                <div id="comment-button-<?php echo $row['post_id']; ?>" class="open-comments"><img
+                                        id="open-comments" src="./images/bubble-chat.png" alt="" height="25"></div>
                                 <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
                                 <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
                             </div>
-                            <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">2,99,792
-                                likes</div>
+
+                            <?php
+                            include "config.php";
+                            $likes_sql = "select likes
+                                    from posts 
+                                    where  post_id={$row["post_id"]} ";
+                            $likes_count_result = mysqli_query($conn, $likes_sql) or die("Query failed");
+
+                            if (mysqli_num_rows($likes_count_result) > 0) {
+                                $likes_row = mysqli_fetch_assoc($likes_count_result);
+                                $likes = $likes_row['likes'];
+                            } else {
+                                $likes = 0;
+                            }
+                            ?>
+                            <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">
+                            <?php echo $likes ?> likes</div>
                             <div class="bottom-menu-margin" style="font-size: 15px;">
                                 <pr style="margin-right: 5px; font-weight: 700;">
                                     <?php echo $_SESSION["username"]; ?>
                                 </pr>
                                 <?php echo $row["caption"]; ?>
                             </div>
+
                             <?php
-               
                             include "config.php";
+                            $count_sql = "select *
+                                    from user_comment 
+                                    where  post_id={$row["post_id"]} Order by comment_id DESC";
+                            $comment_count_result = mysqli_query($conn, $count_sql) or die("Query failed");
 
-                            $sql = "select *
-                             from user_comment 
-                          where  post_id={$row["post_id"]} Order by comment_id DESC
-                
-                          ";
+                            if (mysqli_num_rows($comment_count_result) > 0) {
+                                $i = mysqli_num_rows($comment_count_result);
+                            } else {
+                                $i = 0;
+                            }
+                            ?>
 
-                            $result = mysqli_query($conn, $sql) or die("Query failed");
-
-                            
-                           if(mysqli_num_rows($result) >0 ){
-                            $i=mysqli_num_rows($result);
-                           }
-                           else{
-                            $i=0;
-                           }
-                       
-
-                                ?>
-                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;"><?php echo $i ?> comments</div>
-                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;
-                                                                    display: flex; justify-content: space-between;">
-                                <form action="add-comment.php" method="post">
-                                    <input type="hidden" placeholder="Add a comment" name="pid"
-                                        value="<?php echo $row["post_id"]; ?>">
-                                    <input type="hidden" placeholder="Add a comment" name="uname"
-                                        value="<?php echo $_SESSION["username"]; ?>">
-                                    <input type="text" placeholder="Add a comment" name="user-comment"><button
-                                        type="submit">Add</button>
-                                </form>
-
+                            <div class="bottom-menu-margin" style="font-size: 15px; opacity: 0.7;"><?php echo $i ?> comments
                             </div>
 
-                            <?php
-                
-                            include "config.php";
+                            <form action="add-comment.php" method="post">
+                                <input type="hidden" placeholder="Add a comment" name="pid"
+                                    value="<?php echo $row["post_id"]; ?>">
+                                <input type="hidden" placeholder="Add a comment" name="uname"
+                                    value="<?php echo $_SESSION["username"]; ?>">
 
-                            $sql = "select *
-                             from user_comment 
-                          where  post_id={$row["post_id"]} Order by comment_id DESC
-                
-                          ";
+                                <div class="bottom-menu-margin"
+                                    style="font-size: 15px; opacity: 0.7; margin-right: 8px; display: flex; justify-content: space-between;">
+                                    <input type="text" placeholder="Add a comment" name="user-comment"><button
+                                        type="submit">Add</button>
 
-                            $result = mysqli_query($conn, $sql) or die("Query failed");
-
-
-
-
-                            if (mysqli_num_rows($result) > 0) {
-
-
-
-                                ?>
-
-                                <div id="post-comments">
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        ?>
-                                        <ul class="posthead">
-                                            <li class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
-                                                    height="25"></li>
-                                            <li>
-                                                <div style="font-size: 15px;  font-weight: bold;">
-                                                    <?php echo $row["username"]; ?>
-                                                </div>
-                                            </li>
-                                            <li style="font-size: 14px; margin-left: 5px; "><?php echo $row["user_comment"]; ?></li>
-                                        </ul>
-                                        <?php
-                                    }
-                                    ?>
                                 </div>
-                                <?php
+                            </form>
+
+
+                        </div>
+
+                        <!-- post comments count -->
+
+
+
+                        <!-- post comments -->
+                        <div class="post-comments" id="comment-block-<?php echo $row['post_id']; ?>">
+
+
+                            <?php
+                            include "config.php";
+                            $comment_sql = "select *
+                                             from user_comment 
+                                            where  post_id={$row["post_id"]} Order by comment_id DESC";
+                            $comment_result = mysqli_query($conn, $comment_sql) or die("Query failed");
+                            if (mysqli_num_rows($comment_result) > 0) {
+
+                                while ($comment_row = mysqli_fetch_assoc($comment_result)) {
+                                    ?>
+
+
+
+                                    <ul class="posthead">
+                                        <li class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
+                                                height="25"></li>
+                                        <li>
+                                            <div style="font-size: 15px;  font-weight: bold;">
+                                                <?php echo $comment_row["username"]; ?>
+                                            </div>
+                                        </li>
+                                        <li style="font-size: 14px; margin-left: 5px; "><?php echo $comment_row["user_comment"]; ?></li>
+                                    </ul>
+
+
+                                    <?php
+                                }
+                            } else {
+                                echo "<li>No comments found.</li>";
                             }
-                        
                             ?>
                         </div>
-        
+
+                        <script>
+                            document.getElementById('comment-button-<?php echo $row['post_id']; ?>').addEventListener('click', function () {
+                                var commentBlock = document.getElementById('comment-block-<?php echo $row['post_id']; ?>');
+                                commentBlock.style.display = commentBlock.style.display === 'none' ? 'block' : 'none';
+                            });
+                        </script>
+
                     </div>
+
+
+                    <!-- post loop end -->
                     <?php
-   }
                 }
+            }
             ?>
+
+
         </div>
-     
+
         <div class="menu-bottom">
             <div id="hover1" class="menu-bar home">
                 <div><img src="./images/home.jpg" alt="home"></div>
@@ -315,56 +347,34 @@ if (!isset($_SESSION["username"])) {
                     </form>
                 </div>
             </div>
-            <div class="posthead">
+
+
+            <div>Discover</div>
+            <?php
+            include "config.php";
+            $users_sql = "select * from register ORDER BY user_id DESC";
+            // $result = mysqli_query($conn,$sql) or die("Query failed");
+            $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
+
+            if (mysqli_num_rows($users_result) > 0) {
+                while ($users_row = mysqli_fetch_assoc($users_result)) {
+            ?>
+
+            <div class="posthead suggestions">
                 <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/australian" alt=""
                         height="40"></div>
                 <div>
-                    <li style="font-size: 15px;">nolechick17</li>
-                    <li class="profile-loc">Followed by eden_cat</li>
+                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
+                    <li class="profile-loc"><?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
                 </div>
-
-                <div><a id="follow1" href="#">Follow</a></div>
             </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?men/china" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">salondeban_ebisu</li>
-                    <li class="profile-loc">Followed by 海外か来</li>
-                </div>
+            <?php
+                }
+            }
+            ?>
 
-                <div><a id="follow2" href="#">Follow</a></div>
-            </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?men/american" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">freephaller</li>
-                    <li class="profile-loc">New to Instagram</li>
-                </div>
 
-                <div><a id="follow3" href="#">Follow</a></div>
-            </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?city/streets" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">lukeselby</li>
-                    <li class="profile-loc">Followed by Q_Lines</li>
-                </div>
-
-                <div><a id="follow4" href="#">Follow</a></div>
-            </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/american" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">rachael_cons</li>
-                    <li class="profile-loc">New to Instagram</li>
-                </div>
-
-                <div><a id="follow5" href="#">Follow</a></div>
-            </div>
+            
         </div>
 
     </div>

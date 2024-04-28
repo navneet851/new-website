@@ -1,3 +1,14 @@
+<?php
+include "config.php";
+session_start();
+
+if (!isset($_SESSION["username"])) {
+    header('Location: http://localhost:8080/new-website/login.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,37 +64,37 @@
                     <div class="text">Profile</div>
                 </div>
             </a>
-            <div id="hover4" class="menu-bar">
+            <!-- <div id="hover4" class="menu-bar">
                 <div><img src="./images/menu.png" alt="menu"></div>
                 <div class="text">More</div>
-            </div>
+            </div> -->
         </div>
 
         <div class="search">
             <input type="text" placeholder="Search" autocomplete="on" autofocus>
 
             <div class="posts">
-                <img src="https://source.unsplash.com/random/1080x1080/?cars" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?animals" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?quotes" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?sky" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?space" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?planets" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?nature" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?mountains" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?citys" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?skyscrapers" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?coding" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?robot" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?spacex" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?internet" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?men" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?boy" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?puppies" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?women" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?girl" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?college" alt="">
-                <img src="https://source.unsplash.com/random/1080x1080/?books" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?cars" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?animals" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?sky" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?space" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?planets" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?nature" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?mountains" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?citys" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?skyscrapers" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?coding" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?robot" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?spacex" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?internet" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?men" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?boy" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?puppies" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?women" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?girl" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?college" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?books" alt="">
             </div>
         </div>
         <div class="menu-bottom">
@@ -114,62 +125,45 @@
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="./images/3~2.jpg" alt="" height="55"></div>
                 <div>
-                    <li style="font-size: 15px;">_navi_0048</li>
-                    <li class="profile-loc">Navneet Yadav</li>
+                    <li style="font-size: 15px;">
+                        <?php echo $_SESSION["username"]; ?>
+                    </li>
+                    <li class="profile-loc">
+                        <?php echo ucfirst($_SESSION["firstname"]) . " " . ucfirst($_SESSION["lastname"]); ?>
+                    </li>
                 </div>
-
-                <div><a href="#">Switch</a></div>
+                <div>
+                    <form action="Logout.php" method="post">
+                        <button id="logout" type="submit" value="Logout">Logout</button>
+                    </form>
+                </div>
             </div>
-            <div class="posthead">
+
+            
+            <div>Discover</div>
+            <?php
+            include "config.php";
+            $users_sql = "select * from register ORDER BY user_id DESC";
+            // $result = mysqli_query($conn,$sql) or die("Query failed");
+            $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
+
+            if (mysqli_num_rows($users_result) > 0) {
+                while ($users_row = mysqli_fetch_assoc($users_result)) {
+            ?>
+
+            <div class="posthead suggestions">
                 <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/australian" alt=""
                         height="40"></div>
                 <div>
-                    <li style="font-size: 15px;">nolechick17</li>
-                    <li class="profile-loc">Followed by eden_cat</li>
+                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
+                    <li class="profile-loc"><?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
                 </div>
-
-                <div><a id="follow1" href="#">Follow</a></div>
             </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?men/china" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">salondeban_ebisu</li>
-                    <li class="profile-loc">Followed by 海外か来</li>
-                </div>
+            <?php
+                }
+            }
+            ?>
 
-                <div><a id="follow2" href="#">Follow</a></div>
-            </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?men/american" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">freephaller</li>
-                    <li class="profile-loc">New to Instagram</li>
-                </div>
-
-                <div><a id="follow3" href="#">Follow</a></div>
-            </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?city/streets" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">lukeselby</li>
-                    <li class="profile-loc">Followed by Q_Lines</li>
-                </div>
-
-                <div><a id="follow4" href="#">Follow</a></div>
-            </div>
-            <div class="posthead">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/american" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;">rachael_cons</li>
-                    <li class="profile-loc">New to Instagram</li>
-                </div>
-
-                <div><a id="follow5" href="#">Follow</a></div>
-            </div>
         </div>
 
     </div>

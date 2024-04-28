@@ -266,13 +266,19 @@ svg {
     border-bottom: 1px solid rgb(255, 239, 228);
 }
 
-.menu2 .posthead a{
+/* .menu2 .posthead a{
     font-size: 13px;
     text-decoration: none;
     padding: 2px 15px;
     border-radius: 4px;
     color: white;
     background-color: #1877F2;
+} */
+
+.menu2 .suggestions{
+    padding: 3px;
+    background-color: rgb(246, 246, 246);
+    border-radius: 10px;
 }
 #logout{
     font-size: 13px;
@@ -317,7 +323,7 @@ button {
     border: none;
     cursor: pointer;
 }
-#post-comments{
+.post-comments{
     display: none;
     border: 1px solid rgb(255, 239, 228);
     border-radius: 10px;
@@ -327,16 +333,16 @@ button {
     overflow-y: scroll;
 
 }
-#post-comments::-webkit-scrollbar {
+.post-comments::-webkit-scrollbar {
     /* display: none; */
     overflow-x: hidden;
     border-radius: 10px;
     background-color: rgb(255, 246, 240);
 }
-#post-comments ul li{
+.post-comments ul li{
     list-style: none;
 }
-#post-comments .posthead{
+.post-comments .posthead{
     grid-template-columns: 0.5fr 1fr 4.5fr;
     border-bottom: 1px solid rgb(255, 239, 228);
     padding: 3px;
@@ -371,7 +377,7 @@ button {
     }
 
     #logo {
-        content: url("./images/instagram-short.png");
+        content: url("./images/blogo.png");
         height: 32px;
     }
 
@@ -391,7 +397,7 @@ button {
     }
 
     #logo {
-        content: url("./images/instagram-short.png");
+        content: url("./images/blogo.png");
         height: 32px;
     }
 

@@ -60,12 +60,18 @@ if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
             text-decoration : none;
             font-size : 13px;
         }
+        
+        @media screen and (max-width:500px) {
+            form{
+                border: none;
+            }
+        }
     </style>
 </head>
 <body>
     <form   action="enter-login.php" method="post">
         <p>
-            <img src="./logo.jpg" alt="" height="70">
+        <img src="images/blogo.png" alt="" height="55">
         </p><br><br><br> 
         <input type="text" name="username" placeholder="Username"><br>
         <input type="password" name="passwd" placeholder="Password"><br>

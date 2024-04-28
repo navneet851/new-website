@@ -159,6 +159,21 @@
     filter: blur(3px);
 }
 
+.menu2 .suggestions{
+    padding: 3px;
+    background-color: rgb(246, 246, 246);
+    border-radius: 10px;
+}
+
+#logout{
+    font-size: 13px;
+    text-decoration: none;
+    padding: 2px 15px;
+    border-radius: 4px;
+    color: white;
+    background-color: #1877F2;
+}
+
 input {
     height: 40px;
     width: 340px;
@@ -201,7 +216,7 @@ input {
     }
 
     #logo {
-        content: url("./images/instagram-short.png");
+        content: url("./images/blogo.png");
         height: 32px;
     }
 
