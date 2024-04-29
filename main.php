@@ -81,10 +81,10 @@ if (!isset($_SESSION["username"])) {
             <div><img id="logo" src="./images/Instagram.png" alt="logo"></div>
             <!-- <div><img src="./images/menu.png" alt="menu"></div> -->
             <div>
-            <form action="Logout.php" method="post">
-                        <button type="submit" value="Logout"><img src="./images/logout.png" alt="menu"></button>
-                    </form>
-                
+                <form action="Logout.php" method="post">
+                    <button type="submit" value="Logout"><img src="./images/logout.png" alt="menu"></button>
+                </form>
+
             </div>
 
         </div>
@@ -149,12 +149,30 @@ if (!isset($_SESSION["username"])) {
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-            ?>
+
+                    ?>
                     <div class="post">
 
                         <div class="posthead">
-                            <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
-                                    height="40"></div>
+                            <?php
+                            include "config.php";
+                            $profile_sql = "select profile_img from register where user_id={$row["user_id"]}";
+                            $profile_result = mysqli_query($conn, $profile_sql) or die("Query failed");
+                            if (mysqli_num_rows($profile_result) > 0) {
+                                while($profile_row = mysqli_fetch_assoc($profile_result)){
+                                    ?>
+                                    <div class="profile-icon"><img src="post-images/<?php echo $profile_row['profile_img']; ?>" alt=""
+                                            height="40"></div>
+                                            <?php
+                                }
+                                mysqli_free_result($profile_result);
+                            } else {
+                                echo '<h4>profile</h4>' ;
+                            }
+                            ?>
+                            
+
+
                             <div>
                                 <li style="font-size: 15px; display: flex; align-items: center">
                                     <pr style="margin-right: 3px; font-weight: 600;">
@@ -201,7 +219,8 @@ if (!isset($_SESSION["username"])) {
                             }
                             ?>
                             <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">
-                            <?php echo $likes ?> likes</div>
+                                <?php echo $likes ?> likes
+                            </div>
                             <div class="bottom-menu-margin" style="font-size: 15px;">
                                 <pr style="margin-right: 5px; font-weight: 700;">
                                     <?php echo $_SESSION["username"]; ?>
@@ -329,16 +348,24 @@ if (!isset($_SESSION["username"])) {
 
         <div class="menu menu2">
 
-
+            <?php 
+            include "config.php";
+            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+            if (mysqli_num_rows($session_result) > 0) {
+                $session_row = mysqli_fetch_assoc($session_result);
+            }
+            ?>
 
             <div class="posthead profile-main">
-                <div class="profile-icon"><img src="./images/3~2.jpg" alt="" height="55"></div>
+                <div class="profile-icon"><img src="post-images/<?php echo $session_row['profile_img']; ?>" alt=""
+                        height="55"></div>
                 <div>
                     <li style="font-size: 15px;">
-                        <?php echo $_SESSION["username"]; ?>
+                        <?php echo $session_row["username"]; ?>
                     </li>
                     <li class="profile-loc">
-                        <?php echo ucfirst($_SESSION["firstname"]) . " " . ucfirst($_SESSION["lastname"]); ?>
+                        <?php echo ucfirst($session_row["firstname"]) . " " . ucfirst($session_row["lastname"]); ?>
                     </li>
                 </div>
                 <div>
@@ -358,23 +385,26 @@ if (!isset($_SESSION["username"])) {
 
             if (mysqli_num_rows($users_result) > 0) {
                 while ($users_row = mysqli_fetch_assoc($users_result)) {
-            ?>
+                    ?>
 
-            <div class="posthead suggestions">
-                <div class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?women/australian" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
-                    <li class="profile-loc"><?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
-                </div>
-            </div>
-            <?php
+                    <a href="account.php?user_id=<?php echo $users_row['user_id']; ?>">
+                        <div class="posthead suggestions">
+                            <div class="profile-icon"><img src="post-images/<?php echo $users_row['profile_img']; ?>" alt=""
+                                    height="40"></div>
+                            <div>
+                                <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
+                                <li class="profile-loc">
+                                    <?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
+                            </div>
+                        </div>
+                    </a>
+                    <?php
                 }
             }
             ?>
 
 
-            
+
         </div>
 
     </div>

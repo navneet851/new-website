@@ -188,7 +188,7 @@ if (!isset($_SESSION["username"])) {
     }
 
     .edit-profile-credits {
-      height: 490px;
+      height: 470px;
       align-items: center;
     }
 
@@ -386,12 +386,21 @@ if (!isset($_SESSION["username"])) {
     <div class="search">
       <div class="profile">
         <div class="profile-container">
-          <img src="images/3~2.jpg" alt="">
+
+        <?php 
+            include "config.php";
+            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+            if (mysqli_num_rows($session_result) > 0) {
+                $session_row = mysqli_fetch_assoc($session_result);
+            }
+            ?>
+          <img src="post-images/<?php echo $session_row['profile_img']; ?>" alt="">
           <div class="profile-credits">
             <div style="display: flex; align-items: center;">
 
 
-              <h3><?php echo $_SESSION["username"]; ?></h3><button id="edit-profile-button" type="submit">Edit
+              <h3><?php echo $session_row["username"]; ?></h3><button id="edit-profile-button" type="submit">Edit
                 Profile</button>
 
 
@@ -414,45 +423,38 @@ if (!isset($_SESSION["username"])) {
               <!-- <li><span style="font-weight: bold">500</span> followers</li>
               <li><span style="font-weight: bold">100</span> following</li> -->
             </ul>
-            <h4><?php echo ucfirst($_SESSION["firstname"]) . " " . ucfirst($_SESSION["lastname"]); ?></h4>
-            <p>#spacious</p>
+            <h4><?php echo ucfirst($session_row["firstname"]) . " " . ucfirst($session_row["lastname"]); ?></h4>
+            <p><?php echo $session_row["bio"] ?></p>
           </div>
         </div>
       </div>
-      <?php
-      include "config.php";
-      //session_start();
-      $user_id = $_SESSION["user_id"];
-      $sql = "select * from posts where user_id='{$user_id}' ORDER BY post_id DESC";
 
-      $result = mysqli_query($conn, $sql) or die("Query failed");
-      if (mysqli_num_rows($result) > 0) {
+      <div class="posts">
+        <div class="tag">POSTS</div>
+        <?php
+        include "config.php";
+        //session_start();
+        $user_id = $_SESSION["user_id"];
+        $sql = "select * from posts where user_id='{$user_id}' ORDER BY post_id DESC";
 
+        $result = mysqli_query($conn, $sql) or die("Query failed");
+        if (mysqli_num_rows($result) > 0) {
 
-
-
-        ?>
-        <div class="posts">
-          <div class="tag">POSTS</div>
-          <?php
           while ($row = mysqli_fetch_assoc($result)) {
+
+
             ?>
             <div id="profile_post_img_container"><img src="post-images/<?php echo $row["post_img"]; ?>" alt=""></div>
 
-            <?php
+        <?php
           }
-          ?>
-        </div>
+        } else {
+          echo "<h1>No post<?h1>";
+        }
+        ?>
       </div>
-      <?php
+    </div>
 
-      } else {
-        echo "<h1>No post<?h1>";
-      }
-
-
-
-      ?>
 
     <!-- Edit Profile -->
     <div id="edit-profile">
@@ -465,45 +467,38 @@ if (!isset($_SESSION["username"])) {
 
           $userid = $_SESSION["user_id"];
 
-          $sql = "SELECT * FROM register WHERE user_id={$userid}";
+          $edit_sql = "SELECT * FROM register WHERE user_id={$userid}";
 
-          $result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
-          if (mysqli_num_rows($result) > 0) {
-
+          $edit_result = mysqli_query($conn, $edit_sql) or die("Query failed: " . mysqli_error($conn));
+          if (mysqli_num_rows($edit_result) > 0) {
+            while ($edit_row = mysqli_fetch_assoc($edit_result)) {
 
             ?>
 
 
-            <form action="update-profile1.php" method="POST">
-              <?php
-              while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+            <form action="update-profile.php" method="post"   enctype="multipart/form-data">
+          
                 <div class="profile-credits edit-profile-credits">
-
                   <div id="image-preview">
-                    <img style="height: 150px" id="preview" alt="" src="images/<?php echo $row['profile_img']; ?>">
+                    <img style="height: 150px" id="preview" alt="" src="post-images/<?php echo $edit_row['profile_img']; ?>">
                   </div>
-                  <input id="choose-file" type="file" name="new-image" accept="image/*" onchange="previewImage(event)"
+                  <input id="choose-file" type="file" name="fileUpload" accept="image/*" onchange="previewImage(event)"
                     hidden />
                   <label for="choose-file">Update Image</label>
-                  <input type="text" name="username" placeholder="change Username" value="<?php echo $row['username']; ?>">
-                  <input type="text" name="old_img" placeholder="old_image" value="<?php echo $row['profile_img']; ?>">
+                  <input type="text" name="username" placeholder="change Username" value="<?php echo $edit_row['username']; ?>">
+                  <input type="text" name="old_img" placeholder="old_image" value="<?php echo $edit_row['profile_img']; ?>" hidden>
                   <input type="text" name="firstname" placeholder="change Firstname"
-                    value="<?php echo $row['firstname']; ?>">
-                  <input type="text" name="lastname" placeholder="change Lastname" value="<?php echo $row['lastname']; ?>">
-                  <input type="text" name="bio" placeholder="update bio" value="<?php echo $row['bio']; ?>">
+                    value="<?php echo $edit_row['firstname']; ?>">
+                  <input type="text" name="lastname" placeholder="change Lastname" value="<?php echo $edit_row['lastname']; ?>">
+                  <input type="text" name="bio" placeholder="update bio" value="<?php echo $edit_row['bio']; ?>">
                   <div style="display: flex; align-items: center;">
-                    <button id="edit-cancel-button" type="cancel">cancel</button><button type="submit">Update</button>
-
+                    <button type="submit">Update</button>
                   </div>
-
                 </div>
-                <?php
-              }
-              ?>
+                
             </form>
             <?php
+            }
           }
           ?>
         </div>

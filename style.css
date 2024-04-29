@@ -280,6 +280,10 @@ svg {
     background-color: rgb(246, 246, 246);
     border-radius: 10px;
 }
+.menu2 a{
+    text-decoration: none;
+    color: black;
+}
 #logout{
     font-size: 13px;
     text-decoration: none;

@@ -130,6 +130,10 @@
     color: white;
     background-color: #1877F2;
 }
+.menu2 a, .profiles a{
+    text-decoration: none;
+    color: black;
+}
 
 .search {
     display: flex;

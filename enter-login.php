@@ -6,7 +6,7 @@ include "config.php";
 $username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = mysqli_real_escape_string($conn, sha1($_POST['passwd']));
 
-$sql = "SELECT user_id, firstname, lastname, username, password1
+$sql = "SELECT *
         FROM register 
         WHERE username = '{$username}' AND password1 = '{$password}'";
 
