@@ -176,6 +176,10 @@
 .posts img:hover {
     filter: blur(3px);
 }
+
+.profiles-all{
+    display: none;
+}
 .suggestions{
     margin: 8px;
     padding: 5px;
@@ -201,10 +205,23 @@ input {
     background-color: rgb(229, 229, 230);
     padding-left: 18px;
     font-size: 14px;
-    margin: 40px 0px;
+    margin: 30px 0px;
+}
+#search-button{
+    height: 40px;
+    /* width: 340px; */
+    border-radius: 10px;
+    outline: none;
+    padding: 6px;
+    border: none;
+    background-color: rgb(229, 229, 230);
+    margin: 30px 10px 10px 5px;
 }
 
-
+#search-form{
+    display: flex;
+    justify-content: center;
+}
 
 .menu-bottom {
     display: none;
@@ -217,6 +234,9 @@ input {
 
     .frame {
         grid-template-columns: auto auto;
+    }
+    .profiles-all{
+        display: block;
     }
 }
 
@@ -238,6 +258,9 @@ input {
 
     .frame {
         grid-template-columns: auto auto;
+    }
+    .profiles-all{
+        display: block;
     }
 }
 
@@ -280,8 +303,16 @@ input {
     #hover2 {
         border-radius: 20px;
     }
+    #search-form{
+        width: 100%;
+    }
 
-    input {
+    input{
+        margin: 30px 5px 0px 20px;
+        width: 70%;
+    }
+
+    /* input {
         position: fixed;
         top: 0;
         width: 80%;
@@ -296,7 +327,7 @@ input {
         height: 35px;
         margin: 10px;
         border-radius: 12px;
-    }
+    } */
     .posts {
         width: 100%;
         height: 100vh;
@@ -307,11 +338,11 @@ input {
     }
     .profiles {
         width: 100%;
-        height: 100vh;
         padding: 5px;
-        margin-top: 60px;
-        padding-bottom: 70px;
         border-radius: 0;
+    }
+    .profiles-all{
+        display: block;
     }
 
     .posts img {

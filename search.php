@@ -22,16 +22,6 @@ if (!isset($_SESSION["username"])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 
-    <style>
-        #search-form {
-            display: flex;
-            
-        }
-        #search-button{
-
-        }
-
-    </style>
 </head>
 
 <body>
@@ -93,7 +83,7 @@ if (!isset($_SESSION["username"])) {
         <div class="search">
             <!-- HTML form for username search -->
             <form id="search-form" method="post">
-                <input type="text" name="username" placeholder="Search username">
+                <input type="text" name="username" placeholder="Search" autofocus>
                 <button id="search-button" type="submit" value="Search"><img  src="./images/search.png" alt="search" height="25"></button>
             </form>
 
@@ -135,7 +125,7 @@ if (!isset($_SESSION["username"])) {
                     // Fetch all rows and display them
                     while ($row = $result->fetch_assoc()) {
                         ?>
-
+                        <a href="account.php?user_id=<?php echo $row['user_id']; ?>">
                         <div class="posthead suggestions">
                             <div class="profile-icon"><img src="post-images/<?php echo $row['profile_img']; ?>" alt=""
                                     height="40" width="40"></div>
@@ -147,7 +137,7 @@ if (!isset($_SESSION["username"])) {
                             </div>
                         </div>
 
-
+                        </a>
                     <?php }
 
                     // End the profiles div
@@ -160,7 +150,7 @@ if (!isset($_SESSION["username"])) {
                 ?>
 
             </div>
-            <div class="profiles">
+            <div class="profiles profiles-all">
                 <div style="padding: 10px; border-top: 1px solid lightgray; font-size: 15px; color: gray;">suggestions
                 </div>
                 <?php
@@ -190,29 +180,6 @@ if (!isset($_SESSION["username"])) {
                 }
                 ?>
             </div>
-            <!-- <div class="posts">
-                <img src="https://source.unsplash.com/random/360x360/?cars" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?animals" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?sky" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?space" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?planets" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?nature" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?mountains" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?citys" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?skyscrapers" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?coding" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?robot" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?spacex" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?internet" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?men" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?boy" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?puppies" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?women" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?girl" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?college" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?books" alt="">
-            </div> -->
         </div>
         <div class="menu-bottom">
             <a class="postman" href="main.php">
@@ -267,33 +234,57 @@ if (!isset($_SESSION["username"])) {
                 </div>
             </div>
             <div>Discover</div>
-            <div class="posts">
-                <img src="https://source.unsplash.com/random/360x360/?cars" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?animals" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?sky" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?space" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?planets" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?nature" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?mountains" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?citys" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?skyscrapers" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?coding" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?robot" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?spacex" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?internet" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?men" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?boy" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?puppies" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?women" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?girl" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?college" alt="">
-                <img src="https://source.unsplash.com/random/360x360/?books" alt="">
-            </div>
+            
+                <?php
+                include "config.php";
+                $users_sql = "select * from register ORDER BY user_id DESC";
+                // $result = mysqli_query($conn,$sql) or die("Query failed");
+                $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
 
+                if (mysqli_num_rows($users_result) > 0) {
+                    while ($users_row = mysqli_fetch_assoc($users_result)) {
+                        ?>
 
-
-        </div>
+                        <a href="account.php?user_id=<?php echo $users_row['user_id']; ?>">
+                            <div class="posthead suggestions">
+                                <div class="profile-icon"><img src="post-images/<?php echo $users_row['profile_img']; ?>" alt=""
+                                        height="40" width="40"></div>
+                                <div>
+                                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
+                                    <li class="profile-loc">
+                                        <?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?>
+                                    </li>
+                                </div>
+                            </div>
+                        </a>
+                        <?php
+                    }
+                }
+                ?>
+            
+            <!-- <div class="posts">
+                <img src="https://source.unsplash.com/random/144x144/?cars" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?animals" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?quotes" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?sky" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?space" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?planets" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?nature" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?mountains" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?citys" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?skyscrapers" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?coding" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?robot" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?spacex" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?internet" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?men" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?boy" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?puppies" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?women" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?girl" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?college" alt="">
+                <img src="https://source.unsplash.com/random/144x144/?books" alt="">
+            </div>    -->
 
     </div>
     <script>
