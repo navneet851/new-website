@@ -24,6 +24,7 @@
 
         .profile-container img {
             height: 140px;
+            width: 140px;
             border-radius: 50%;
         }
 
@@ -116,6 +117,7 @@
 
             .profile-container img {
                 height: 90px;
+                width: 90px;
             }
 
             .posts {

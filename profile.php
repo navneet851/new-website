@@ -56,8 +56,10 @@ if (!isset($_SESSION["username"])) {
 
     .profile-container img {
       height: 140px;
+      width: 140px;
       border-radius: 50%;
     }
+
 
     .profile-credits {
       height: 100px;
@@ -125,7 +127,7 @@ if (!isset($_SESSION["username"])) {
       height: 150px;
       margin: 10px;
       border-radius: 50%;
-      background-color: rgb(214, 214, 215);
+      /* background-color: rgb(214, 214, 215); */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -135,12 +137,7 @@ if (!isset($_SESSION["username"])) {
       object-fit: cover;
     }
 
-    .profile-container img {
-      max-width: 150px;
-      width: auto;
-      max-height: 150px;
-      height: auto;
-    }
+  
 
 
     label {
@@ -301,6 +298,7 @@ if (!isset($_SESSION["username"])) {
 
       .profile-container img {
         height: 90px;
+        width: 90px;
       }
 
       .posts {
@@ -369,10 +367,19 @@ if (!isset($_SESSION["username"])) {
           <div class="text">Create</div>
         </div>
       </a>
+      <?php
+      include "config.php";
+      $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+      $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+      if (mysqli_num_rows($session_result) > 0) {
+        $session_row = mysqli_fetch_assoc($session_result);
+      }
+      ?>
       <div id="hover7" class="menu-bar">
-        <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+        <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
         <div class="text">Profile</div>
       </div>
+
       <form action="Logout.php" method="post">
         <button style="width: 100%; color: black; background: none; border: none" type="submit" value="Logout">
           <div id="hover4" class="menu-bar">
@@ -387,14 +394,14 @@ if (!isset($_SESSION["username"])) {
       <div class="profile">
         <div class="profile-container">
 
-        <?php 
-            include "config.php";
-            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
-            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
-            if (mysqli_num_rows($session_result) > 0) {
-                $session_row = mysqli_fetch_assoc($session_result);
-            }
-            ?>
+          <?php
+          include "config.php";
+          $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+          $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+          if (mysqli_num_rows($session_result) > 0) {
+            $session_row = mysqli_fetch_assoc($session_result);
+          }
+          ?>
           <img src="post-images/<?php echo $session_row['profile_img']; ?>" alt="">
           <div class="profile-credits">
             <div style="display: flex; align-items: center;">
@@ -446,7 +453,7 @@ if (!isset($_SESSION["username"])) {
             ?>
             <div id="profile_post_img_container"><img src="post-images/<?php echo $row["post_img"]; ?>" alt=""></div>
 
-        <?php
+            <?php
           }
         } else {
           echo "<h1>No post<?h1>";
@@ -473,31 +480,35 @@ if (!isset($_SESSION["username"])) {
           if (mysqli_num_rows($edit_result) > 0) {
             while ($edit_row = mysqli_fetch_assoc($edit_result)) {
 
-            ?>
+              ?>
 
 
-            <form action="update-profile.php" method="post"   enctype="multipart/form-data">
-          
+              <form action="update-profile.php" method="post" enctype="multipart/form-data">
+
                 <div class="profile-credits edit-profile-credits">
                   <div id="image-preview">
-                    <img style="height: 150px" id="preview" alt="" src="post-images/<?php echo $edit_row['profile_img']; ?>">
+                    <img  id="preview" alt=""
+                      src="post-images/<?php echo $edit_row['profile_img']; ?>">
                   </div>
                   <input id="choose-file" type="file" name="fileUpload" accept="image/*" onchange="previewImage(event)"
                     hidden />
                   <label for="choose-file">Update Image</label>
-                  <input type="text" name="username" placeholder="change Username" value="<?php echo $edit_row['username']; ?>">
-                  <input type="text" name="old_img" placeholder="old_image" value="<?php echo $edit_row['profile_img']; ?>" hidden>
+                  <input type="text" name="username" placeholder="change Username"
+                    value="<?php echo $edit_row['username']; ?>">
+                  <input type="text" name="old_img" placeholder="old_image" value="<?php echo $edit_row['profile_img']; ?>"
+                    hidden>
                   <input type="text" name="firstname" placeholder="change Firstname"
                     value="<?php echo $edit_row['firstname']; ?>">
-                  <input type="text" name="lastname" placeholder="change Lastname" value="<?php echo $edit_row['lastname']; ?>">
+                  <input type="text" name="lastname" placeholder="change Lastname"
+                    value="<?php echo $edit_row['lastname']; ?>">
                   <input type="text" name="bio" placeholder="update bio" value="<?php echo $edit_row['bio']; ?>">
                   <div style="display: flex; align-items: center;">
                     <button type="submit">Update</button>
                   </div>
                 </div>
-                
-            </form>
-            <?php
+
+              </form>
+              <?php
             }
           }
           ?>
@@ -540,7 +551,7 @@ if (!isset($_SESSION["username"])) {
         <div><img src="./images/instagram-reels.png" alt="reels"></div>
       </div> -->
       <div id="hover7" class="menu-bar">
-        <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+        <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
       </div>
     </div>
   </div>

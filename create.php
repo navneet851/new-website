@@ -260,9 +260,17 @@ if (!isset($_SESSION["username"])) {
                 <div><img src="./images/story.png" alt="add"></div>
                 <div class="text">Create</div>
             </div>
+            <?php 
+            include "config.php";
+            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+            if (mysqli_num_rows($session_result) > 0) {
+                $session_row = mysqli_fetch_assoc($session_result);
+            }
+            ?>
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
                     <div class="text">Profile</div>
                 </div>
             </a>
@@ -317,7 +325,7 @@ if (!isset($_SESSION["username"])) {
             </div> -->
             <a class="postman" href="profile.php">
             <div id="hover7" class="menu-bar">
-                <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
             </div>
             </a>
         </div>

@@ -23,20 +23,14 @@ if (!isset($_SESSION["username"])) {
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 
     <style>
-        
-        .profiles{
-            display: none;
+        #search-form {
+            display: flex;
+            
+        }
+        #search-button{
+
         }
 
-
-        @media only screen and (max-width:950px) {
-            .profiles{
-                display: block;
-            }
-            .posts{
-                display: none;
-            }
-        }
     </style>
 </head>
 
@@ -75,9 +69,18 @@ if (!isset($_SESSION["username"])) {
                     <div class="text">Create</div>
                 </div>
             </a>
+            <?php
+            include "config.php";
+            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+            if (mysqli_num_rows($session_result) > 0) {
+                $session_row = mysqli_fetch_assoc($session_result);
+            }
+            ?>
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile">
+                    </div>
                     <div class="text">Profile</div>
                 </div>
             </a>
@@ -88,35 +91,106 @@ if (!isset($_SESSION["username"])) {
         </div>
 
         <div class="search">
-            <input type="text" placeholder="Search" autocomplete="on" autofocus>
+            <!-- HTML form for username search -->
+            <form id="search-form" method="post">
+                <input type="text" name="username" placeholder="Search username">
+                <button id="search-button" type="submit" value="Search"><img  src="./images/search.png" alt="search" height="25"></button>
+            </form>
 
             <div class="profiles">
-            <?php
-            include "config.php";
-            $users_sql = "select * from register ORDER BY user_id DESC";
-            // $result = mysqli_query($conn,$sql) or die("Query failed");
-            $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
-
-            if (mysqli_num_rows($users_result) > 0) {
-                while ($users_row = mysqli_fetch_assoc($users_result)) {
-            ?>
-            
-            <a href="account.php?user_id=<?php echo $users_row['user_id']; ?>">
-            <div class="posthead suggestions">
-                <div class="profile-icon"><img src="post-images/<?php echo $users_row['profile_img']; ?>" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
-                    <li class="profile-loc"><?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
+                <div style="padding: 10px; border-top: 1px solid lightgray; font-size: 15px; color: gray;">search result
                 </div>
-            </div>
-            </a>
-            <?php
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    // Get the submitted username
+                    $username = $_POST['username'];
+
+                    // Connect to the database
+                    include "config.php";
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+
+                    // Create a prepared statement
+                    $stmt = $conn->prepare("SELECT * FROM register WHERE LOWER(username) LIKE LOWER(?) OR LOWER(firstname) LIKE LOWER(?) OR LOWER(lastname) LIKE LOWER(?)");
+
+
+                    // Bind parameters
+                    $searchTerm = "%" . $username . "%";
+                    $stmt->bind_param("sss", $searchTerm, $searchTerm, $searchTerm);
+
+
+                    // Execute the statement
+                    $stmt->execute();
+
+                    // Get the result
+                    $result = $stmt->get_result();
+
+                    // Start the profiles div
+                
+
+                    // Fetch all rows and display them
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+
+                        <div class="posthead suggestions">
+                            <div class="profile-icon"><img src="post-images/<?php echo $row['profile_img']; ?>" alt=""
+                                    height="40" width="40"></div>
+                            <div>
+                                <li style="font-size: 15px;"><?php echo $row["username"]; ?></li>
+                                <li class="profile-loc">
+                                    <?php echo ucfirst($row["firstname"]) . " " . ucfirst($row["lastname"]); ?>
+                                </li>
+                            </div>
+                        </div>
+
+
+                    <?php }
+
+                    // End the profiles div
+                
+
+                    // Close the statement and the connection
+                    $stmt->close();
+                    $conn->close();
                 }
-            }
-            ?>
+                ?>
+
             </div>
-            <div class="posts">
+            <div class="profiles">
+                <div style="padding: 10px; border-top: 1px solid lightgray; font-size: 15px; color: gray;">suggestions
+                </div>
+                <?php
+                include "config.php";
+                $users_sql = "select * from register ORDER BY user_id DESC";
+                // $result = mysqli_query($conn,$sql) or die("Query failed");
+                $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
+
+                if (mysqli_num_rows($users_result) > 0) {
+                    while ($users_row = mysqli_fetch_assoc($users_result)) {
+                        ?>
+
+                        <a href="account.php?user_id=<?php echo $users_row['user_id']; ?>">
+                            <div class="posthead suggestions">
+                                <div class="profile-icon"><img src="post-images/<?php echo $users_row['profile_img']; ?>" alt=""
+                                        height="40" width="40"></div>
+                                <div>
+                                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
+                                    <li class="profile-loc">
+                                        <?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?>
+                                    </li>
+                                </div>
+                            </div>
+                        </a>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
+            <!-- <div class="posts">
                 <img src="https://source.unsplash.com/random/360x360/?cars" alt="">
                 <img src="https://source.unsplash.com/random/360x360/?animals" alt="">
                 <img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
@@ -138,7 +212,7 @@ if (!isset($_SESSION["username"])) {
                 <img src="https://source.unsplash.com/random/360x360/?girl" alt="">
                 <img src="https://source.unsplash.com/random/360x360/?college" alt="">
                 <img src="https://source.unsplash.com/random/360x360/?books" alt="">
-            </div>
+            </div> -->
         </div>
         <div class="menu-bottom">
             <a class="postman" href="main.php">
@@ -160,12 +234,13 @@ if (!isset($_SESSION["username"])) {
             </div> -->
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile">
+                    </div>
                 </div>
             </a>
         </div>
         <div class="menu menu2">
-        <?php 
+            <?php
             include "config.php";
             $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
             $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
@@ -191,33 +266,32 @@ if (!isset($_SESSION["username"])) {
                     </form>
                 </div>
             </div>
-
-            
             <div>Discover</div>
-            <?php
-            include "config.php";
-            $users_sql = "select * from register ORDER BY user_id DESC";
-            // $result = mysqli_query($conn,$sql) or die("Query failed");
-            $users_result = mysqli_query($conn, $users_sql) or die('Invalid query: ' . mysqli_error($conn));
-
-            if (mysqli_num_rows($users_result) > 0) {
-                while ($users_row = mysqli_fetch_assoc($users_result)) {
-            ?>
-            
-            <a href="account.php?user_id=<?php echo $users_row['user_id']; ?>">
-            <div class="posthead suggestions">
-                <div class="profile-icon"><img src="post-images/<?php echo $users_row['profile_img']; ?>" alt=""
-                        height="40"></div>
-                <div>
-                    <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
-                    <li class="profile-loc"><?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
-                </div>
+            <div class="posts">
+                <img src="https://source.unsplash.com/random/360x360/?cars" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?animals" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?sky" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?space" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?planets" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?nature" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?mountains" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?citys" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?skyscrapers" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?coding" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?robot" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?spacex" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?internet" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?men" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?boy" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?puppies" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?women" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?girl" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?college" alt="">
+                <img src="https://source.unsplash.com/random/360x360/?books" alt="">
             </div>
-            </a>
-            <?php
-                }
-            }
-            ?>
+
+
 
         </div>
 

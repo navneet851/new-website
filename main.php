@@ -61,9 +61,18 @@ if (!isset($_SESSION["username"])) {
                     <div class="text">Create</div>
                 </div>
             </a>
+
+            <?php 
+            include "config.php";
+            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
+            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
+            if (mysqli_num_rows($session_result) > 0) {
+                $session_row = mysqli_fetch_assoc($session_result);
+            }
+            ?>
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
                     <div class="text">Profile</div>
                 </div>
             </a>
@@ -162,7 +171,7 @@ if (!isset($_SESSION["username"])) {
                                 while($profile_row = mysqli_fetch_assoc($profile_result)){
                                     ?>
                                     <div class="profile-icon"><img src="post-images/<?php echo $profile_row['profile_img']; ?>" alt=""
-                                            height="40"></div>
+                                            height="40" width="40"></div>
                                             <?php
                                 }
                                 mysqli_free_result($profile_result);
@@ -339,27 +348,21 @@ if (!isset($_SESSION["username"])) {
             <!-- <div id="hover6" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
             </div> -->
+            
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="./images/3~2.jpg" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
                 </div>
             </a>
         </div>
 
         <div class="menu menu2">
 
-            <?php 
-            include "config.php";
-            $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
-            $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
-            if (mysqli_num_rows($session_result) > 0) {
-                $session_row = mysqli_fetch_assoc($session_result);
-            }
-            ?>
+            
 
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="post-images/<?php echo $session_row['profile_img']; ?>" alt=""
-                        height="55"></div>
+                        height="55" width="55"></div>
                 <div>
                     <li style="font-size: 15px;">
                         <?php echo $session_row["username"]; ?>
@@ -390,7 +393,7 @@ if (!isset($_SESSION["username"])) {
                     <a href="account.php?user_id=<?php echo $users_row['user_id']; ?>">
                         <div class="posthead suggestions">
                             <div class="profile-icon"><img src="post-images/<?php echo $users_row['profile_img']; ?>" alt=""
-                                    height="40"></div>
+                                    height="40" width="40"></div>
                             <div>
                                 <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
                                 <li class="profile-loc">
