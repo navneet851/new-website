@@ -62,7 +62,7 @@ if (!isset($_SESSION["username"])) {
                 </div>
             </a>
 
-            <?php 
+            <?php
             include "config.php";
             $session_sql = "select * from register where user_id={$_SESSION['user_id']}";
             $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
@@ -72,7 +72,8 @@ if (!isset($_SESSION["username"])) {
             ?>
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile">
+                    </div>
                     <div class="text">Profile</div>
                 </div>
             </a>
@@ -168,18 +169,18 @@ if (!isset($_SESSION["username"])) {
                             $profile_sql = "select profile_img from register where user_id={$row["user_id"]}";
                             $profile_result = mysqli_query($conn, $profile_sql) or die("Query failed");
                             if (mysqli_num_rows($profile_result) > 0) {
-                                while($profile_row = mysqli_fetch_assoc($profile_result)){
+                                while ($profile_row = mysqli_fetch_assoc($profile_result)) {
                                     ?>
                                     <div class="profile-icon"><img src="post-images/<?php echo $profile_row['profile_img']; ?>" alt=""
                                             height="40" width="40"></div>
-                                            <?php
+                                    <?php
                                 }
                                 mysqli_free_result($profile_result);
                             } else {
-                                echo '<h4>profile</h4>' ;
+                                echo '<h4>profile</h4>';
                             }
                             ?>
-                            
+
 
 
                             <div>
@@ -204,29 +205,128 @@ if (!isset($_SESSION["username"])) {
                             <img id="ani1" src="./images/whiteh.png" alt="">
                             <img class="pic" loading="lazy" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
                         </div>
+
+                        <!-- like-button-code -->
+
+                        <?php
+                        // Your existing code...
+                
+                        // Get the user ID and post ID
+                        $user_id = $_SESSION['user_id'];
+                        $post_id = $row['post_id'];
+
+                        // Check if the user ID and post ID exist in the same row in the likes table
+                        $stmtl = $conn->prepare("SELECT * FROM likes WHERE user_id = ? AND post_id = ?");
+                        $stmtl->bind_param("ii", $user_id, $post_id);
+                        $stmtl->execute();
+                        $like_img_result = $stmtl->get_result();
+
+                        if ($like_img_result->num_rows > 0) {
+                            // The user ID and post ID exist in the same row
+                            $like_img = 'redheart.png';
+                        } else {
+                            // The user ID and post ID do not exist in the same row
+                            $like_img = 'heart.png';
+                        }
+                        ?>
+
+
+
                         <div class="postbottom">
                             <div class="bottom_menu">
-                                <div><img id="heart1" src="./images/heart.png" alt="" height="24"></div>
+                                <div>
+                                    <form method="post">
+                                        <input type="text" name="post_id" value="<?php echo $row['post_id']; ?>" hidden>
+                                        <button type="submit"><img id="heart1" src="./images/<?php echo $like_img ?>" alt=""
+                                                height="24"></button>
+                                    </form>
+
+                                </div>
                                 <div id="comment-button-<?php echo $row['post_id']; ?>" class="open-comments"><img
                                         id="open-comments" src="./images/bubble-chat.png" alt="" height="25"></div>
                                 <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
-                                <div><img src="./images/bookmark-white.png" alt="" height="21"></div>
+                                <!-- <div><img src="./images/bookmark-white.png" alt="" height="21"></div> -->
                             </div>
+
+
+
+
+
+
+
+                            <!-- post like -->
+
+                            <?php
+
+                            // Connect to the database
+                            include "config.php";
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                // Get the user ID and post ID from the form
+                                $user_id = $_SESSION['user_id'];
+                                $post_id = $_POST['post_id'];
+
+                                // Check if the user has already liked this post
+                                $stmtm = $conn->prepare("SELECT * FROM likes WHERE user_id = ? AND post_id = ?");
+                                $stmtm->bind_param("ii", $user_id, $post_id);
+                                $stmtm->execute();
+                                $like_result = $stmtm->get_result();
+
+                                if ($like_result->num_rows > 0) {
+                                    // The user has already liked this post, so unlike it
+                                    $stmtm = $conn->prepare("DELETE FROM likes WHERE user_id = ? AND post_id = ?");
+                                } else {
+                                    // The user has not liked this post, so like it
+                                    $stmtm = $conn->prepare("INSERT INTO likes (user_id, post_id) VALUES (?, ?)");
+                                }
+
+                                // Execute the statement
+                                $stmtm->bind_param("ii", $user_id, $post_id);
+                                $stmtm->execute();
+
+                                // Close the statement
+                                $stmtm->close();
+
+                                // Redirect to the same page with JavaScript
+                                echo "<script>
+                                    window.onload = function() {
+                                        window.location.href='main.php';
+                                            };
+                                    </script>";
+
+                            }
+
+                            // Close the connection
+                            $conn->close();
+                            ?>
+
+
+                            <!-- post like end -->
+
+
+
+
+
+
+
+
+
+
 
                             <?php
                             include "config.php";
-                            $likes_sql = "select likes
-                                    from posts 
-                                    where  post_id={$row["post_id"]} ";
-                            $likes_count_result = mysqli_query($conn, $likes_sql) or die("Query failed");
+                            $like_count_sql = "select *
+                                    from likes 
+                                    where  post_id={$row["post_id"]}";
+                            $like_count_result = mysqli_query($conn, $like_count_sql) or die("Query failed");
 
-                            if (mysqli_num_rows($likes_count_result) > 0) {
-                                $likes_row = mysqli_fetch_assoc($likes_count_result);
-                                $likes = $likes_row['likes'];
+                            if (mysqli_num_rows($like_count_result) > 0) {
+                                $likes = mysqli_num_rows($like_count_result);
                             } else {
                                 $likes = 0;
                             }
                             ?>
+
                             <div class="bottom-menu-margin" id="number1" style="font-size: 15px; font-weight: 700;">
                                 <?php echo $likes ?> likes
                             </div>
@@ -290,10 +390,25 @@ if (!isset($_SESSION["username"])) {
                                 while ($comment_row = mysqli_fetch_assoc($comment_result)) {
                                     ?>
 
+                            <?php
+                            include "config.php";
+                            $comment_profile_sql = "select *
+                                    from register 
+                                    where  post_id={$comment_row["post_id"]} ";
+                            $comment_profile_result = mysqli_query($conn, $comment_profile_sql) or die("Query failed");
+
+                            if (mysqli_num_rows($comment_profile_result) > 0) {
+                                $comment_profile_row = mysqli_fetch_assoc($comment_profile_result);
+                                $comment_profile = $comment_profile_row['profile_img'];
+                            } else {
+                                $comment_profile = "";
+                            }
+                            ?>
+
 
 
                                     <ul class="posthead">
-                                        <li class="profile-icon"><img src="https://source.unsplash.com/random/360x360/?gtr" alt=""
+                                        <li class="profile-icon"><img src="<?php echo $comment_profile ; ?>" alt=""
                                                 height="25"></li>
                                         <li>
                                             <div style="font-size: 15px;  font-weight: bold;">
@@ -348,17 +463,18 @@ if (!isset($_SESSION["username"])) {
             <!-- <div id="hover6" class="menu-bar">
                 <div><img src="./images/instagram-reels.png" alt="reels"></div>
             </div> -->
-            
+
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile"></div>
+                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile">
+                    </div>
                 </div>
             </a>
         </div>
 
         <div class="menu menu2">
 
-            
+
 
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="post-images/<?php echo $session_row['profile_img']; ?>" alt=""
@@ -397,7 +513,8 @@ if (!isset($_SESSION["username"])) {
                             <div>
                                 <li style="font-size: 15px;"><?php echo $users_row["username"]; ?></li>
                                 <li class="profile-loc">
-                                    <?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?></li>
+                                    <?php echo ucfirst($users_row["firstname"]) . " " . ucfirst($users_row["lastname"]); ?>
+                                </li>
                             </div>
                         </div>
                     </a>

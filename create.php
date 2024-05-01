@@ -285,15 +285,15 @@ if (!isset($_SESSION["username"])) {
                 <form action="save-post.php" method="post"  enctype="multipart/form-data">
                     <div class="profile-container">
                         <div id="image-preview">
-                            <img id="preview" alt="">
+                            <img id="preview" alt="" required>
                         </div>
 
-                        <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)" hidden />
+                        <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)" hidden required/>
                         <label for="choose-file">add image</label>
                         <div class="profile-credits">
                             <h4>_navi_0048</h4>
-                            <input type="text"  name="caption"  placeholder="add caption">
-                            <input type="text" name="loc"  placeholder="Location">
+                            <input type="text"  name="caption"  placeholder="add caption" required>
+                            <input type="text" name="loc"  placeholder="Location" required>
                             <button type="submit">Post</button>
                         </div>
                     </div>

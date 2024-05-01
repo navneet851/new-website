@@ -73,8 +73,8 @@ if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
         <p>
         <img src="images/blogo.png" alt="" height="55">
         </p><br><br><br> 
-        <input type="text" name="username" placeholder="Username"><br>
-        <input type="password" name="passwd" placeholder="Password"><br>
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="passwd" placeholder="Password" required><br>
 
         <button type="submit" value="login">Login</button>
         <a href="index.php">Sign up</a>

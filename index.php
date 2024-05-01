@@ -82,10 +82,10 @@ if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")
             <img src="images/blogo.png" alt="" height="55">
         </p><br><br><br> 
         <input type="email" name="email" placeholder="E mail"><br>
-        <input type="text" name="firstname" placeholder="First Name"><br>
-        <input type="text" name="lastname" placeholder="Last Name"><br>
-        <input type="text" name="username" placeholder="Username"><br>
-        <input type="password" name="passwd" placeholder="Password"><br>
+        <input type="text" name="firstname" placeholder="First Name" required><br>
+        <input type="text" name="lastname" placeholder="Last Name" required><br>
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="passwd" placeholder="Password" required><br>
 
         <button type="submit" value="Submit">sign in</button>
         <a href="login.php">already have account?</a>
