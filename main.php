@@ -393,7 +393,7 @@ if (!isset($_SESSION["username"])) {
                             <?php
                             include "config.php";
                             $comment_profile_sql = "select *
-                                    from register 
+                                    from posts
                                     where  post_id={$comment_row["post_id"]} ";
                             $comment_profile_result = mysqli_query($conn, $comment_profile_sql) or die("Query failed");
 
