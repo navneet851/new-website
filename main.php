@@ -24,6 +24,7 @@ if (!isset($_SESSION["username"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -194,12 +195,9 @@ if (!isset($_SESSION["username"])) {
                                 </li>
                             </div>
 
-                            <div><img id="three-dot-opener" src="./images/dots-three-vertical-3601841-3003583.png" alt=""
-                                    height="22"></div>
-                            <ul id="three-dot-options">
-                                <li>Remove Post</li>
-                                <li>gfgf</li>
-                            </ul>
+                            <!-- <div><img id="three-dot-opener" src="./images/dots-three-vertical-3601841-3003583.png" alt=""
+                                    height="22"></div> -->
+                            
                         </div>
                         <div id="dbl-ani1" class="post-anim">
                             <img id="ani1" src="./images/whiteh.png" alt="">
@@ -235,7 +233,7 @@ if (!isset($_SESSION["username"])) {
                         <div class="postbottom">
                             <div class="bottom_menu">
                                 <div>
-                                    <form method="post">
+                                    <form method="post" action="post-like.php">
                                         <input type="text" name="post_id" value="<?php echo $row['post_id']; ?>" hidden>
                                         <button type="submit"><img id="heart1" src="./images/<?php echo $like_img ?>" alt=""
                                                 height="24"></button>
@@ -245,7 +243,19 @@ if (!isset($_SESSION["username"])) {
                                 <div id="comment-button-<?php echo $row['post_id']; ?>" class="open-comments"><img
                                         id="open-comments" src="./images/bubble-chat.png" alt="" height="25"></div>
                                 <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
-                                <!-- <div><img src="./images/bookmark-white.png" alt="" height="21"></div> -->
+
+                                <?php
+                                    if($_SESSION['user_id']==$row['user_id']){
+                                        $delete_post = "display:block;";
+                                    }
+                                    else{
+                                        $delete_post = "display:none;";
+                                    }
+
+                                ?>
+                                <div>
+                                    <a href="delete-post.php?post_id=<?php echo $row['post_id']; ?>" style="<?php echo $delete_post ?> font-size: 11px; color: rgb(39, 67, 248); font-family: sans-serif;">delete post</a>
+                                </div>
                             </div>
 
 
@@ -256,49 +266,7 @@ if (!isset($_SESSION["username"])) {
 
                             <!-- post like -->
 
-                            <?php
-
-                            // Connect to the database
-                            include "config.php";
-
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                // Get the user ID and post ID from the form
-                                $user_id = $_SESSION['user_id'];
-                                $post_id = $_POST['post_id'];
-
-                                // Check if the user has already liked this post
-                                $stmtm = $conn->prepare("SELECT * FROM likes WHERE user_id = ? AND post_id = ?");
-                                $stmtm->bind_param("ii", $user_id, $post_id);
-                                $stmtm->execute();
-                                $like_result = $stmtm->get_result();
-
-                                if ($like_result->num_rows > 0) {
-                                    // The user has already liked this post, so unlike it
-                                    $stmtm = $conn->prepare("DELETE FROM likes WHERE user_id = ? AND post_id = ?");
-                                } else {
-                                    // The user has not liked this post, so like it
-                                    $stmtm = $conn->prepare("INSERT INTO likes (user_id, post_id) VALUES (?, ?)");
-                                }
-
-                                // Execute the statement
-                                $stmtm->bind_param("ii", $user_id, $post_id);
-                                $stmtm->execute();
-
-                                // Close the statement
-                                $stmtm->close();
-
-                                // Redirect to the same page with JavaScript
-                                echo "<script>
-                                    window.onload = function() {
-                                        window.location.href='main.php';
-                                            };
-                                    </script>";
-
-                            }
-
-                            // Close the connection
-                            $conn->close();
-                            ?>
+                            
 
 
                             <!-- post like end -->
@@ -332,7 +300,7 @@ if (!isset($_SESSION["username"])) {
                             </div>
                             <div class="bottom-menu-margin" style="font-size: 15px;">
                                 <pr style="margin-right: 5px; font-weight: 700;">
-                                    <?php echo $_SESSION["username"]; ?>
+                                    <?php echo $row["uid1"]; ?>
                                 </pr>
                                 <?php echo $row["caption"]; ?>
                             </div>
@@ -374,7 +342,7 @@ if (!isset($_SESSION["username"])) {
                         <!-- post comments count -->
 
 
-
+                        
                         <!-- post comments -->
                         <div class="post-comments" id="comment-block-<?php echo $row['post_id']; ?>">
 
@@ -390,26 +358,13 @@ if (!isset($_SESSION["username"])) {
                                 while ($comment_row = mysqli_fetch_assoc($comment_result)) {
                                     ?>
 
-                            <?php
-                            include "config.php";
-                            $comment_profile_sql = "select *
-                                    from posts
-                                    where  post_id={$comment_row["post_id"]} ";
-                            $comment_profile_result = mysqli_query($conn, $comment_profile_sql) or die("Query failed");
-
-                            if (mysqli_num_rows($comment_profile_result) > 0) {
-                                $comment_profile_row = mysqli_fetch_assoc($comment_profile_result);
-                                $comment_profile = $comment_profile_row['profile_img'];
-                            } else {
-                                $comment_profile = "";
-                            }
-                            ?>
+                           
 
 
 
                                     <ul class="posthead">
-                                        <li class="profile-icon"><img src="<?php echo $comment_profile ; ?>" alt=""
-                                                height="25"></li>
+                                        <!-- <li class="profile-icon"><img src="<?php echo $comment_profile ; ?>" alt=""
+                                                height="25"></li> -->
                                         <li>
                                             <div style="font-size: 15px;  font-weight: bold;">
                                                 <?php echo $comment_row["username"]; ?>
@@ -531,6 +486,7 @@ if (!isset($_SESSION["username"])) {
 
 
     <script src="script.js"></script>
+    
 </body>
 
 </html>
