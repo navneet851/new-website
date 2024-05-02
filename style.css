@@ -31,6 +31,7 @@
     overflow: scroll;
     align-items: center;
     border: none;
+    margin-top: 25px;
 }
 
 .menu1::-webkit-scrollbar {
@@ -83,44 +84,7 @@
     margin: 15px;
 }
 
-.story {
-    display: flex;
-    justify-content: center;
-    height: 120px;
-    width: 500px;
-}
 
-svg {
-    position: relative;
-    stroke: #8a3ab8;
-    stroke-linecap: round;
-    stroke-width: 1.7;
-
-}
-
-@keyframes dash {
-    0% {
-        stroke: #cd85f6;
-        stroke-dashoffset: 100;
-        stroke-dasharray: 8;
-    }
-
-    50% {
-        stroke: rgb(169, 95, 4);
-        stroke-dasharray: 15;
-    }
-
-    70% {
-        stroke: rgb(255, 31, 154);
-        stroke-dasharray: 5;
-    }
-
-    100% {
-        stroke: #b5b5b5;
-        stroke-dasharray: 0.1;
-        stroke-width: 0.7;
-    }
-}
 
 .id {
     display: flex;
@@ -139,6 +103,8 @@ svg {
     border-radius: 50%;
     top: 32px;
 }
+
+
 
 .post {
     display: flex;
@@ -174,51 +140,6 @@ svg {
     margin: 5px 0px;
 }
 
-.post-anim {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#ani1,
-#ani2,
-#ani3,
-#ani4 {
-    position: absolute;
-    height: 30vh;
-    opacity: 0;
-}
-
-@keyframes heart {
-    0% {
-        height: 10vh;
-    }
-
-    25% {
-        height: 30vh;
-    }
-
-    45% {
-        height: 25vh;
-    }
-
-    60% {
-        height: 33vh;
-    }
-
-    85% {
-        height: 20vh;
-    }
-
-    99% {
-        height: 30vh;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
 
 .posthead div li {
     list-style-type: none;
@@ -238,26 +159,7 @@ svg {
 .posthead{
     position: relative;
 }
-#three-dot-options{
-    display: none;
-    border-radius: 7px;
-    background-color: #fff7f7;
-    position: absolute;
-    right: 10px;
-    top: 40px;
-    z-index: 100;
-}
-#three-dot-options li{
-    list-style: none;
-    padding: 5px;
-    margin: 5px;
-    font-size: 15px;
-    border-radius: 8px;
-    text-align: center;
-}
-#three-dot-options li:hover{
-    background-color: #f0ecec;
-}
+
 
 .profile-main {
     padding-top: 35px;
@@ -348,9 +250,10 @@ button {
     list-style: none;
 }
 .post-comments .posthead{
-    grid-template-columns: 0.5fr 1fr 4.5fr;
+    grid-template-columns: 0.5fr 1fr 4.5fr 0.5fr;
     border-bottom: 1px solid rgb(255, 239, 228);
     padding: 3px;
+    width: 100%;
 }
 .menu-top {
     display: none;

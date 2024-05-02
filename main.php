@@ -24,7 +24,7 @@ if (!isset($_SESSION["username"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -69,11 +69,14 @@ if (!isset($_SESSION["username"])) {
             $session_result = mysqli_query($conn, $session_sql) or die("Query failed");
             if (mysqli_num_rows($session_result) > 0) {
                 $session_row = mysqli_fetch_assoc($session_result);
+                $sessionim = $session_row['profile_img'];
+            } else {
+                $sessionim = "profile-placeholder.jpg";
             }
             ?>
             <a class="postman" href="profile.php">
                 <div id="hover7" class="menu-bar">
-                    <div><img id="profile" src="post-images/<?php echo $session_row['profile_img']; ?>" alt="profile">
+                    <div><img id="profile" src="post-images/<?php echo $sessionim ?>" alt="profile">
                     </div>
                     <div class="text">Profile</div>
                 </div>
@@ -100,53 +103,7 @@ if (!isset($_SESSION["username"])) {
 
         </div>
         <div class="main menu menu1">
-            <div class="story-outer">
-
-                <div class="story">
-                    <div class="id" id="svg"><img src="./images/3~2.jpg" alt="">
-                        <svg id="sv" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>your story</p>
-                    </div>
-                    <div class="id" id="svg2"><img src="https://source.unsplash.com/random/360x360/?coding" alt="">
-                        <svg id="sv2" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>code_hub</p>
-                    </div>
-                    <div class="id" id="svg3"><img src="https://source.unsplash.com/random/360x360/?women" alt="">
-                        <svg id="sv3" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>stacy grand</p>
-                    </div>
-                    <div class="id" id="svg4"><img src="https://source.unsplash.com/random/360x360/?men" alt="">
-                        <svg id="sv4" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>otus</p>
-                    </div>
-                    <div class="id" id="svg5"><img src="https://source.unsplash.com/random/360x360/?nasa" alt="">
-                        <svg id="sv5" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>nasa</p>
-                    </div>
-                    <div class="id" id="svg6"><img src="https://source.unsplash.com/random/360x360/?gtr" alt="">
-                        <svg id="sv6" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>Gtr</p>
-                    </div>
-                    <div class="id" id="svg7"><img src="https://source.unsplash.com/random/360x360/?quotes" alt="">
-                        <svg id="sv7" height="70" width="70">
-                            <circle cx="35" cy="35" r="32" fill="none">
-                        </svg>
-                        <p>Q_Lines</p>
-                    </div>
-                </div>
-            </div>
+            
 
 
 
@@ -163,6 +120,7 @@ if (!isset($_SESSION["username"])) {
 
                     ?>
                     <div class="post">
+                        <div id="post-3r429cibhe<?php echo $row['post_id']; ?>"></div>
 
                         <div class="posthead">
                             <?php
@@ -197,10 +155,9 @@ if (!isset($_SESSION["username"])) {
 
                             <!-- <div><img id="three-dot-opener" src="./images/dots-three-vertical-3601841-3003583.png" alt=""
                                     height="22"></div> -->
-                            
+
                         </div>
-                        <div id="dbl-ani1" class="post-anim">
-                            <img id="ani1" src="./images/whiteh.png" alt="">
+                        <div >
                             <img class="pic" loading="lazy" src="post-images/<?php echo $row["post_img"]; ?>" alt="">
                         </div>
 
@@ -229,7 +186,6 @@ if (!isset($_SESSION["username"])) {
                         ?>
 
 
-
                         <div class="postbottom">
                             <div class="bottom_menu">
                                 <div>
@@ -245,16 +201,17 @@ if (!isset($_SESSION["username"])) {
                                 <!-- <div><img src="./images/send.png" alt="" height="22"></div> -->
 
                                 <?php
-                                    if($_SESSION['user_id']==$row['user_id']){
-                                        $delete_post = "display:block;";
-                                    }
-                                    else{
-                                        $delete_post = "display:none;";
-                                    }
+                                if ($_SESSION['user_id'] == $row['user_id']) {
+                                    $delete_post = "display:block;";
+                                } else {
+                                    $delete_post = "display:none;";
+                                }
 
                                 ?>
                                 <div>
-                                    <a href="delete-post.php?post_id=<?php echo $row['post_id']; ?>" style="<?php echo $delete_post ?> font-size: 11px; color: rgb(39, 67, 248); font-family: sans-serif;">delete post</a>
+                                    <a href="delete-post.php?post_id=<?php echo $row['post_id']; ?>"
+                                        style="<?php echo $delete_post ?> font-size: 11px; color: rgb(39, 67, 248); font-family: sans-serif;">delete
+                                        post</a>
                                 </div>
                             </div>
 
@@ -266,7 +223,7 @@ if (!isset($_SESSION["username"])) {
 
                             <!-- post like -->
 
-                            
+
 
 
                             <!-- post like end -->
@@ -342,7 +299,7 @@ if (!isset($_SESSION["username"])) {
                         <!-- post comments count -->
 
 
-                        
+
                         <!-- post comments -->
                         <div class="post-comments" id="comment-block-<?php echo $row['post_id']; ?>">
 
@@ -358,19 +315,37 @@ if (!isset($_SESSION["username"])) {
                                 while ($comment_row = mysqli_fetch_assoc($comment_result)) {
                                     ?>
 
-                           
+                                    <?php
+                                    include "config.php";
+                                    $comment_user_sql = "select * from register where user_id={$comment_row['user_id']}";
+                                    $comment_user_result = mysqli_query($conn, $comment_user_sql) or die("Query failed");
+                                    if (mysqli_num_rows($comment_user_result) > 0) {
+                                        $comment_user_row = mysqli_fetch_assoc($comment_user_result);
+                                        $comment_user = $comment_user_row['profile_img'];
+                                    } else {
+                                        $comment_user = "profile-placeholder.jpg";
+                                    }
+                                    ?>
 
 
 
                                     <ul class="posthead">
-                                        <!-- <li class="profile-icon"><img src="<?php echo $comment_profile ; ?>" alt=""
-                                                height="25"></li> -->
+                                        <li class="profile-icon"><img src="post-images/<?php echo $comment_user; ?>" alt=""
+                                                height="25" width="25"></li>
                                         <li>
                                             <div style="font-size: 15px;  font-weight: bold;">
                                                 <?php echo $comment_row["username"]; ?>
                                             </div>
                                         </li>
                                         <li style="font-size: 14px; margin-left: 5px; "><?php echo $comment_row["user_comment"]; ?></li>
+                                        <li>
+                                            <form action="delete-comment.php" method="post">
+                                                <input type="text" name="post_id" value="<?php echo $comment_row['post_id'] ?>" hidden>
+                                                <input type="text" name="to-be-deleted" value="<?php echo $comment_row['comment_id'] ?>" hidden>
+                                                <button type="submit"><img src="images/dustbin.png" height="15" alt=""></button>
+                                            </form>
+                                            
+                                        </li>
                                     </ul>
 
 
@@ -486,7 +461,7 @@ if (!isset($_SESSION["username"])) {
 
 
     <script src="script.js"></script>
-    
+
 </body>
 
 </html>

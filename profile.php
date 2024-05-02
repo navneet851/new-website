@@ -456,7 +456,8 @@ if (!isset($_SESSION["username"])) {
             <?php
           }
         } else {
-          echo "<h1>No post<?h1>";
+          echo "<h4></h4>";
+          echo "<h4 style='text-align:center; margin-top:50px'>No post<?h4>";
         }
         ?>
       </div>

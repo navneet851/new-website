@@ -12,6 +12,7 @@
         $lastname=mysqli_real_escape_string($conn,$_POST['lastname']);
         $username=mysqli_real_escape_string($conn,$_POST['username']);
         $password=mysqli_real_escape_string($conn,sha1($_POST['passwd']));
+        $profile_img="profile-placeholder.jpg";
        
       
         $sql="SELECT username
@@ -23,8 +24,8 @@
         
       }
       else{
-      $sql1 = "INSERT INTO register (firstname,lastname,username,Email,password1)
-      VALUES ('{$firstname}','{$lastname}', '{$username}', '{$email}','{$password}')";
+      $sql1 = "INSERT INTO register (firstname,lastname,username,Email,password1,profile_img)
+      VALUES ('{$firstname}','{$lastname}', '{$username}', '{$email}','{$password}','{$profile_img}')";
           // $result1= or die("query failed: insert");
       
       if(mysqli_query($conn,$sql1))
