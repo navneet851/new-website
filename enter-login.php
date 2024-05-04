@@ -20,7 +20,7 @@ if(mysqli_num_rows($result) > 0) {
     $_SESSION["lastname"] = $row['lastname'];
     mysqli_free_result($result);
     mysqli_close($conn);
-    header('Location: http://localhost:8080/new-website/main.php');
+    header('Location: main.php');
     exit; // Ensure script stops execution after redirect
 } else {
     mysqli_close($conn);

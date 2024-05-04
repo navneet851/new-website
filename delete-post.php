@@ -18,7 +18,7 @@ $sql = "DELETE FROM user_comment WHERE post_id = $post_id";
 $result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
 
 if($result) {
-    header('Location: http://localhost:8080/new-website/main.php');
+    header('Location: main.php');
     exit; // Ensure script stops execution after redirect
 } else {
     mysqli_close($conn);

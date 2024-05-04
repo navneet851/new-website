@@ -24,7 +24,7 @@ if(mysqli_multi_query($conn,$sql)){
 
     echo "<script>
         window.onload = function() {
-            window.location.href='http://localhost:8080/new-website/main.php#post-3r429cibhe" . $post_id . "';
+            window.location.href='main.php#post-3r429cibhe" . $post_id . "';
         };
     </script>";
 }

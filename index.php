@@ -7,7 +7,7 @@ session_start();
 
 if(isset( $_SESSION["username"] ))
 {
-    header('Location: http://localhost:8080/new-website/main.php');
+    header('Location: main.php');
 }
 
 if(isset($_GET['id'])=="356a192b7913b04c54574d18c28d46e6395428ab")

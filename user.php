@@ -20,7 +20,7 @@
         $result=mysqli_query($conn,$sql) or die("query failed:");
       if(mysqli_num_rows($result)>0)
       {
-        header('Location: http://localhost:8080/new-website/index.php?id=356a192b7913b04c54574d18c28d46e6395428ab');
+        header('Location: index.php?id=356a192b7913b04c54574d18c28d46e6395428ab');
         
       }
       else{
@@ -31,7 +31,7 @@
       if(mysqli_query($conn,$sql1))
       {
         
-     header('Location: http://localhost:8080/new-website/login.php?id=356a192b7913b04c54574d18c28d46e6395428ab');
+     header('Location: login.php?id=356a192b7913b04c54574d18c28d46e6395428ab');
       
       }
       else{ 

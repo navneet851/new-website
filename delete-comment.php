@@ -14,7 +14,7 @@ $result = mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn
 if($result) {
     echo "<script>
         window.onload = function() {
-            window.location.href='http://localhost:8080/new-website/main.php#post-3r429cibhe" . $post_id . "';
+            window.location.href='main.php#post-3r429cibhe" . $post_id . "';
         };
     </script>";
     exit; // Ensure script stops execution after redirect

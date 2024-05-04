@@ -31,7 +31,7 @@
     overflow: scroll;
     align-items: center;
     border: none;
-    margin-top: 25px;
+    /* padding-top: 25px; */
 }
 
 .menu1::-webkit-scrollbar {
@@ -44,7 +44,8 @@
 }
 
 #profile {
-    height: 20px;
+    height: 23px;
+    width: 23px;
     border-radius: 50%;
 }
 

@@ -3,7 +3,7 @@ include "config.php";
 session_start();
 
 if (!isset($_SESSION["username"])) {
-    header('Location: http://localhost:8080/new-website/login.php');
+    header('Location: login.php');
 }
 
 ?>
@@ -15,7 +15,7 @@ if (!isset($_SESSION["username"])) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Instagram</title>
     <link rel="stylesheet" href="search.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -218,7 +218,7 @@ if (!isset($_SESSION["username"])) {
 
             <div class="posthead profile-main">
                 <div class="profile-icon"><img src="post-images/<?php echo $session_row['profile_img']; ?>" alt=""
-                        height="55"></div>
+                        height="55" width="55"></div>
                 <div>
                     <li style="font-size: 15px;">
                         <?php echo $session_row["username"]; ?>
@@ -287,43 +287,7 @@ if (!isset($_SESSION["username"])) {
             </div>    -->
 
     </div>
-    <script>
-        let follow1 = document.getElementById('follow1')
-        follow1.addEventListener("click", () => {
-            follow1.innerHTML = "Followed"
-            follow1.style.backgroundColor = "rgb(247, 244, 247)"
-            follow1.style.border = "1px solid rgb(171, 170, 170)"
-            follow1.style.color = "black"
-        })
-        let follow2 = document.getElementById('follow2')
-        follow2.addEventListener("click", () => {
-            follow2.innerHTML = "Followed"
-            follow2.style.backgroundColor = "rgb(247, 244, 247)"
-            follow2.style.border = "1px solid rgb(171, 170, 170)"
-            follow2.style.color = "black"
-        })
-        let follow3 = document.getElementById('follow3')
-        follow3.addEventListener("click", () => {
-            follow3.innerHTML = "Followed"
-            follow3.style.backgroundColor = "rgb(247, 244, 247)"
-            follow3.style.border = "1px solid rgb(171, 170, 170)"
-            follow3.style.color = "black"
-        })
-        let follow4 = document.getElementById('follow4')
-        follow4.addEventListener("click", () => {
-            follow4.innerHTML = "Followed"
-            follow4.style.backgroundColor = "rgb(247, 244, 247)"
-            follow4.style.border = "1px solid rgb(171, 170, 170)"
-            follow4.style.color = "black"
-        })
-        let follow5 = document.getElementById('follow5')
-        follow5.addEventListener("click", () => {
-            follow5.innerHTML = "Followed"
-            follow5.style.backgroundColor = "rgb(247, 244, 247)"
-            follow5.style.border = "1px solid rgb(171, 170, 170)"
-            follow5.style.color = "black"
-        })
-    </script>
+    
 </body>
 
 </html>

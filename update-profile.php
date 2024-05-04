@@ -37,7 +37,7 @@ if ($_FILES['fileUpload']['error'] == UPLOAD_ERR_NO_FILE) {
 
     $result = mysqli_query($conn, $sql) or die("query failed");
     if ($result) {
-        header('Location: http://localhost:8080/new-website/profile.php');
+        header('Location: profile.php');
     } else {
         echo "query failed";
     }

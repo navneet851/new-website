@@ -40,7 +40,11 @@ VALUES ('{$cap}','{$location1}','{$newname}','{$Uid}',{$user_id})";
 
 if(mysqli_multi_query($conn,$sql)){
 
-    header('Location: http://localhost:8080/new-website/main.php');
+    echo "<script>
+        window.onload = function() {
+            window.location.href='main.php';
+        };
+    </script>";
 }
 else{
     echo  "query failed";
