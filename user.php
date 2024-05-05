@@ -1,12 +1,7 @@
 
 <?php
    include "config.php";
-    
- 
-
-
-       
-        
+     
         $email=mysqli_real_escape_string($conn,$_POST['email']);
         $firstname=mysqli_real_escape_string($conn,$_POST['firstname']);
         $lastname=mysqli_real_escape_string($conn,$_POST['lastname']);

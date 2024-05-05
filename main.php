@@ -136,7 +136,8 @@ if (!isset($_SESSION["username"])) {
                             }
 
                             ?>
-                            <div class="profile-icon"><img src="post-images/<?php echo $session_user_profile ?>" alt="" height="40" width="40">
+                            <div class="profile-icon"><img src="post-images/<?php echo $session_user_profile ?>" alt=""
+                                    height="40" width="40">
                             </div>
 
 
@@ -339,7 +340,16 @@ if (!isset($_SESSION["username"])) {
                                         </li>
                                         <li style="font-size: 14px; margin-left: 5px; "><?php echo $comment_row["user_comment"]; ?></li>
                                         <li>
-                                            <form action="delete-comment.php" method="post">
+                                            <?php
+                                            if ($_SESSION['user_id'] == $comment_row['user_id'] || $_SESSION['user_id'] == $row['user_id']) {
+                                                $delete_comment = "display:block;";
+                                            } else {
+                                                $delete_comment = "display:none;";
+                                            }
+
+                                            ?>
+
+                                            <form style="<?php echo $delete_comment ?>" action="delete-comment.php" method="post">
                                                 <input type="text" name="post_id" value="<?php echo $comment_row['post_id'] ?>" hidden>
                                                 <input type="text" name="to-be-deleted" value="<?php echo $comment_row['comment_id'] ?>"
                                                     hidden>
