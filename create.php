@@ -291,7 +291,7 @@ if (!isset($_SESSION["username"])) {
                         <input id="choose-file" type="file" name="fileToUpload" accept="image/*" onchange="previewImage(event)" hidden required/>
                         <label for="choose-file">add image</label>
                         <div class="profile-credits">
-                            <h4>_navi_0048</h4>
+                            <h4><?php echo $session_row['username']; ?></h4>
                             <input type="text"  name="caption"  placeholder="add caption" required>
                             <input type="text" name="loc"  placeholder="Location" required>
                             <button type="submit">Post</button>
